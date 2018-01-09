@@ -11,7 +11,11 @@ public class Personnel {
 		return codeEmp;
 	}
 
-	public void setCodeEmp(int codeEmp) {
+	public void setCodeEmp(int codeEmp) throws Exception {
+		if (codeEmp == 0)
+		{
+			throw new Exception("Code invalide");
+		}
 		this.codeEmp = codeEmp;
 	}
 
@@ -19,7 +23,11 @@ public class Personnel {
 		return nom;
 	}
 
-	public void setNom(String nom) {
+	public void setNom(String nom) throws Exception {
+		if (nom.equals("") || nom.equals(null))
+		{
+			throw new Exception("Nom invalide");
+		}
 		this.nom = nom;
 	}
 
@@ -27,7 +35,11 @@ public class Personnel {
 		return mdp;
 	}
 
-	public void setMdp(String mdp) {
+	public void setMdp(String mdp) throws Exception {
+		if (mdp.equals("") || mdp.equals(null))
+		{
+			throw new Exception("Mot de passe invalide");
+		}
 		this.mdp = mdp;
 	}
 
@@ -35,7 +47,11 @@ public class Personnel {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(String role) throws Exception {
+		if (role.equals("") || role.equals(null))
+		{
+			throw new Exception("Role invalide");
+		}
 		this.role = role;
 	}
 
@@ -48,11 +64,11 @@ public class Personnel {
 	}
 
 	public Personnel(int codeEmp, String nom, String mdp, String role,
-			boolean archive) {
-		this.codeEmp = codeEmp;
-		this.nom = nom;
-		this.mdp = mdp;
-		this.role = role;
-		this.archive = archive;
+			boolean archive) throws Exception {
+		setCodeEmp(codeEmp);
+		setNom(nom);
+		setMdp(mdp);
+		setRole(role);
+		setArchive(archive);
 	}
 }
