@@ -18,7 +18,11 @@ public class Client {
 		return code;
 	}
 
-	public void setCode(int code) {
+	public void setCode(int code) throws Exception {
+		if (code == 0)
+		{
+			throw new Exception("Code invalide");
+		}
 		this.code = code;
 	}
 
@@ -26,7 +30,11 @@ public class Client {
 		return nom;
 	}
 
-	public void setNom(String nom) {
+	public void setNom(String nom) throws Exception {
+		if (nom.equals("") || nom.equals(null))
+		{
+			throw new Exception("Nom invalide");
+		}
 		this.nom = nom;
 	}
 
@@ -34,7 +42,11 @@ public class Client {
 		return prenom;
 	}
 
-	public void setPrenom(String prenom) {
+	public void setPrenom(String prenom) throws Exception {
+		if (prenom.equals("") || prenom.equals(null))
+		{
+			throw new Exception("prenom invalide");
+		}
 		this.prenom = prenom;
 	}
 
@@ -42,7 +54,11 @@ public class Client {
 		return adresse1;
 	}
 
-	public void setAdresse1(String adresse1) {
+	public void setAdresse1(String adresse1) throws Exception {
+		if (adresse1.equals("") || adresse1.equals(null))
+		{
+			throw new Exception("Adresse invalide");
+		}
 		this.adresse1 = adresse1;
 	}
 
@@ -50,7 +66,11 @@ public class Client {
 		return adresse2;
 	}
 
-	public void setAdresse2(String adresse2) {
+	public void setAdresse2(String adresse2) throws Exception {
+		if (adresse2.equals("") || adresse2.equals(null))
+		{
+			throw new Exception("Adresse invalide");
+		}
 		this.adresse2 = adresse2;
 	}
 
@@ -58,7 +78,11 @@ public class Client {
 		return cp;
 	}
 
-	public void setCp(String cp) {
+	public void setCp(String cp) throws Exception {
+		if (cp.equals("") || cp.equals(null))
+		{
+			throw new Exception("Code postal invalide");
+		}
 		this.cp = cp;
 	}
 
@@ -66,7 +90,11 @@ public class Client {
 		return ville;
 	}
 
-	public void setVille(String ville) {
+	public void setVille(String ville) throws Exception {
+		if (ville.equals("") || ville.equals(null))
+		{
+			throw new Exception("Ville invalide");
+		}
 		this.ville = ville;
 	}
 
@@ -74,7 +102,11 @@ public class Client {
 		return numTel;
 	}
 
-	public void setNumTel(String numTel) {
+	public void setNumTel(String numTel) throws Exception {
+		if (numTel.equals("") || numTel.equals(null))
+		{
+			throw new Exception("Numero téléphone invalide");
+		}
 		this.numTel = numTel;
 	}
 
@@ -82,7 +114,11 @@ public class Client {
 		return assurance;
 	}
 
-	public void setAssurance(String assurance) {
+	public void setAssurance(String assurance) throws Exception{
+		if (assurance.equals("") || assurance.equals(null))
+		{
+			throw new Exception("Assurance invalide");
+		}
 		this.assurance = assurance;
 	}
 
@@ -90,7 +126,11 @@ public class Client {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(String email) throws Exception {
+		if (email.equals("") || email.equals(null))
+		{
+			throw new Exception("Email invalide");
+		}
 		this.email = email;
 	}
 
@@ -98,7 +138,11 @@ public class Client {
 		return remarque;
 	}
 
-	public void setRemarque(String remarque) {
+	public void setRemarque(String remarque) throws Exception {
+		if (remarque.equals("") || remarque.equals(null))
+		{
+			throw new Exception("Nom invalide");
+		}
 		this.remarque = remarque;
 	}
 
@@ -112,18 +156,18 @@ public class Client {
 
 	public Client(int code, String nom, String prenom, String adresse1,
 			String adresse2, String cp, String ville, String numTel,
-			String assurance, String email, String remarque, boolean archive) {
-		this.code = code;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse1 = adresse1;
-		this.adresse2 = adresse2;
-		this.cp = cp;
-		this.ville = ville;
-		this.numTel = numTel;
-		this.assurance = assurance;
-		this.email = email;
-		this.remarque = remarque;
-		this.archive = archive;
+			String assurance, String email, String remarque, boolean archive) throws Exception {
+		setCode(code);
+		setNom(nom);
+		setPrenom(prenom);
+		setAdresse1(adresse1);
+		setAdresse2(adresse2);
+		setCp(cp);
+		setVille(ville);
+		setNumTel(numTel);
+		setAssurance(assurance);
+		setEmail(email);
+		setRemarque(remarque);
+		setArchive(archive);
 	}
 }

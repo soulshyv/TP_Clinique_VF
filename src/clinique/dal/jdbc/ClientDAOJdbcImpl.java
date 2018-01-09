@@ -88,6 +88,9 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 			}
 		} catch (SQLException e) {
 			throw new DALException("select by code failde - ", e);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -103,19 +106,24 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 
 			List<Client> clients = new ArrayList<Client>();
 			while (rs.next()) {
-				clients.add(new Client(rs.getInt("CodeClient"), rs
-						.getString("NomClient"), rs.getString("PrenomClient"),
-						rs.getString("Adresse1"), rs.getString("Adresse2"), rs
-								.getString("CodePostal"),
-						rs.getString("Ville"), rs.getString("NumTel"), rs
-								.getString("Assurance"), rs.getString("Email"),
-						rs.getString("Remarque"), rs.getBoolean("Archive")));
+				try {
+					clients.add(new Client(rs.getInt("CodeClient"), rs
+							.getString("NomClient"), rs.getString("PrenomClient"),
+							rs.getString("Adresse1"), rs.getString("Adresse2"), rs
+									.getString("CodePostal"),
+							rs.getString("Ville"), rs.getString("NumTel"), rs
+									.getString("Assurance"), rs.getString("Email"),
+							rs.getString("Remarque"), rs.getBoolean("Archive")));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 			return clients;
 		} catch (SQLException e) {
 			throw new DALException();
-		}
+		} 
 	}
 
 	@Override
@@ -128,19 +136,23 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 
 			List<Client> clients = new ArrayList<Client>();
 			while (rs.next()) {
-				clients.add(new Client(rs.getInt("CodeClient"), rs
-						.getString("NomClient"), rs.getString("PrenomClient"),
-						rs.getString("Adresse1"), rs.getString("Adresse2"), rs
-								.getString("CodePostal"),
-						rs.getString("Ville"), rs.getString("NumTel"), rs
-								.getString("Assurance"), rs.getString("Email"),
-						rs.getString("Remarque"), rs.getBoolean("Archive")));
+				try {
+					clients.add(new Client(rs.getInt("CodeClient"), rs
+							.getString("NomClient"), rs.getString("PrenomClient"),
+							rs.getString("Adresse1"), rs.getString("Adresse2"), rs
+									.getString("CodePostal"),
+							rs.getString("Ville"), rs.getString("NumTel"), rs
+									.getString("Assurance"), rs.getString("Email"),
+							rs.getString("Remarque"), rs.getBoolean("Archive")));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-
 			return clients;
 		} catch (SQLException e) {
 			throw new DALException();
-		}
+		} 
 	}
 
 }

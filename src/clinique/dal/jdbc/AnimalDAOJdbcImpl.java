@@ -108,6 +108,9 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		return liste;
 	}
@@ -148,6 +151,9 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		return liste;
 	}
@@ -182,6 +188,9 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		return liste;
 	}
@@ -216,6 +225,9 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		return liste;
 	}

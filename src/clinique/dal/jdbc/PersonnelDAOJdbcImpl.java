@@ -48,6 +48,9 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		return liste;
 	}
@@ -82,6 +85,9 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} 
 		return liste;
 	}
