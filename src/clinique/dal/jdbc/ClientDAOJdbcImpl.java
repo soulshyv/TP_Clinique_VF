@@ -40,12 +40,12 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 			int nbRows = rqt.executeUpdate();
 			if (nbRows != 1) {
 				conn.rollback();
-				throw new DALException("insert failed");
+				throw new DALException("[Client] insert failed");
 			} else {
 				conn.commit();
 			}
-		} catch (SQLException e) {
-			throw new DALException("insert failed - ", e);
+		} catch (Exception e) {
+			throw new DALException("[Client] insert failed - ", e);
 		}
 	}
 
@@ -60,12 +60,12 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 			int nbRows = rqt.executeUpdate();
 			if (nbRows != 1) {
 				conn.rollback();
-				throw new DALException("delete by code failed");
+				throw new DALException("[Client] delete by code failed");
 			} else {
 				conn.commit();
 			}
-		} catch (SQLException e) {
-			throw new DALException("delete by code failed - ", e);
+		} catch (Exception e) {
+			throw new DALException("[Client] delete by code failed - ", e);
 		}
 	}
 
@@ -86,8 +86,8 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 						rs.getString("Assurance"), rs.getString("Email"),
 						rs.getString("Remarque"), rs.getBoolean("Archive"));
 			}
-		} catch (SQLException e) {
-			throw new DALException("select by code failde - ", e);
+		} catch (Exception e) {
+			throw new DALException("[Client] select by code failde - ", e);
 		}
 		return null;
 	}
@@ -113,8 +113,8 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 			}
 
 			return clients;
-		} catch (SQLException e) {
-			throw new DALException();
+		} catch (Exception e) {
+			throw new DALException("[Client] select by nom failed - ", e);
 		}
 	}
 
@@ -138,8 +138,8 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 			}
 
 			return clients;
-		} catch (SQLException e) {
-			throw new DALException();
+		} catch (Exception e) {
+			throw new DALException("[Client] select all failed - ", e);
 		}
 	}
 

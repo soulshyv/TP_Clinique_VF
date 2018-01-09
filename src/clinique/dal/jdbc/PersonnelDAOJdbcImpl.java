@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import clinique.dal.DALException;
 import clinique.dal.PersonnelDAO;
 import clinique.models.Animal;
 import clinique.models.Personnel;
+import clinique.services.BLLException;
 
 public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	private final String sqlInsert = "{call ajout_personnel (?,?,?,?,?,?,?,?)}";
@@ -23,7 +25,7 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	 * @see clinique.dal.jdbc.PersonnelDAO#selectAll()
 	 */
 	@Override
-	public List<Personnel> selectAll() {
+	public List<Personnel> selectAll() throws DALException {
 		List<Personnel> liste = new ArrayList<Personnel>();
 		try (Connection cnx = JdbcTools.getConnection();
 				PreparedStatement rqt = cnx.prepareStatement(sqlSelectAll);
@@ -41,22 +43,15 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 				
 				liste.add(perso);
 			}
-		} catch (SQLException e) {
-			try {
-				throw new Exception("selectAll failed - " , e);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		} catch (Exception e) {
+			throw new DALException("[Personnel] selectAll failed - " , e);
 		} 
 		return liste;
 	}
 	
-	/* (non-Javadoc)
-	 * @see clinique.dal.jdbc.PersonnelDAO#selectByNom(java.lang.String)
-	 */
+	
 	@Override
-	public List<Personnel> selectByNom(String nom){
+	public List<Personnel> selectByNom(String nom) throws DALException {
 		List<Personnel> liste = new ArrayList<Personnel>();
 		try (Connection cnx = JdbcTools.getConnection();
 				PreparedStatement rqt = cnx.prepareStatement(sqlSelectByNom);
@@ -75,22 +70,14 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 				
 				liste.add(perso);
 			}
-		} catch (SQLException e) {
-			try {
-				throw new Exception("selectAll failed - " , e);
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		} catch (Exception e) {
+			throw new DALException("[Personnel] select by nom failed - " , e);
 		} 
 		return liste;
 	}
 	
-	/* (non-Javadoc)
-	 * @see clinique.dal.jdbc.PersonnelDAO#delete(int)
-	 */
 	@Override
-	public void delete(int code) {
+	public void delete(int code) throws DALException {
 		try (Connection cnx = JdbcTools.getConnection();
 				CallableStatement rqt = cnx.prepareCall(sqlDelete);){
 			
@@ -102,25 +89,19 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 			if (nbRows != 1)
 			{
 				cnx.rollback();
-				throw new Exception("echec de la suppression");
+				throw new DALException("[Personnel] delete failed");
 			} else {
 				cnx.commit();
 			}
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new DALException("[Personnel] delete failed - ", e);
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see clinique.dal.jdbc.PersonnelDAO#insert(clinique.models.Personnel)
-	 */
+	
 	@Override
-	public void insert(Personnel perso) {
+	public void insert(Personnel perso) throws DALException {
 		try (Connection cnx = JdbcTools.getConnection();
 				CallableStatement rqt = cnx.prepareCall(sqlInsert);){
 			
@@ -136,22 +117,20 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 			if (nbRows != 1)
 			{
 				cnx.rollback();
-				throw new Exception("echec de l'insertion");
+				throw new DALException("[Personnel] insert failed");
 			} else {
 				cnx.commit();
 			}
 
 		} catch (Exception e){
-			e.printStackTrace();
+			throw new DALException("[Personnel] insert failed - ", e);
 		}
 
 	}
 	
-	/* (non-Javadoc)
-	 * @see clinique.dal.jdbc.PersonnelDAO#updatePwd(java.lang.String, java.lang.String)
-	 */
+	
 	@Override
-	public void updatePwd (String CodePers, String pwd){
+	public void updatePwd (String CodePers, String pwd) throws DALException {
 		try (Connection cnx = JdbcTools.getConnection();
 				CallableStatement rqt = cnx.prepareCall(sqlUpdatePwd);){
 			
@@ -164,13 +143,13 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 			if (nbRows != 1)
 			{
 				cnx.rollback();
-				throw new Exception("echec de l'insertion");
+				throw new DALException("[Personnel] update password failed");
 			} else {
 				cnx.commit();
 			}
 
 		} catch (Exception e){
-			e.printStackTrace();
+			throw new DALException("[Personnel] update password failed - ", e);
 		}
 	}
 }

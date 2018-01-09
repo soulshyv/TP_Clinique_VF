@@ -4,7 +4,10 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import clinique.dal.DALException;
 import clinique.dal.RdvDAO;
@@ -20,6 +23,10 @@ public class RdvDAODjbcImpl implements RdvDAO {
 	private final String sqlDeleteByDate = "DELETE FROM Agendas WHERE DateRdv=?";
 	private final String sqlDeleteByCodeAnimal = "DATE FROM Agendas WHERE CodeAnimal=?";
 	private final String sqlDelete = "DELETE FROM Agendas WHERE CodeVeto=? AND CodeAnimal=? AND DateRdv=?";
+	private final String sqlSelectByCodeVeto = "SELECT * FROM Agendas WHERE CodeVeto=?";
+	private final String sqlSelectByDateRdv = "SELECT * FROM DateRdv=?";
+	private final String sqlSelectByCodeAnimal = "SELECT * FROM Agendas WHERE CodeAnimal=?";
+	private final String sqlSelectAll = "SELECT * FROM Agendas";
 
 	@Override
 	public void insert(Client client, Animal animal, Personnel personnel,
@@ -37,12 +44,12 @@ public class RdvDAODjbcImpl implements RdvDAO {
 			int nbRows = rqt.executeUpdate();
 			if (nbRows != 1) {
 				conn.rollback();
-				throw new DALException();
+				throw new DALException("[Rdv] insert failed");
 			} else {
 				conn.commit();
 			}
 		} catch (SQLException e) {
-			throw new DALException();
+			throw new DALException("[Rdv] insert failed - ", e);
 		}
 	}
 
@@ -57,12 +64,12 @@ public class RdvDAODjbcImpl implements RdvDAO {
 			int nbRows = rqt.executeUpdate();
 			if (nbRows != 1) {
 				conn.rollback();
-				throw new DALException();
+				throw new DALException("[Rdv] delete by code veto failed");
 			} else {
 				conn.commit();
 			}
 		} catch (SQLException e) {
-			throw new DALException();
+			throw new DALException("[Rdv] delete by code veto failed - ", e);
 		}
 	}
 
@@ -77,12 +84,12 @@ public class RdvDAODjbcImpl implements RdvDAO {
 			int nbRows = rqt.executeUpdate();
 			if (nbRows != 1) {
 				conn.rollback();
-				throw new DALException();
+				throw new DALException("[Rdv] delete by date failed");
 			} else {
 				conn.commit();
 			}
 		} catch (SQLException e) {
-			throw new DALException();
+			throw new DALException("[Rdv] delete by date failed - ", e);
 		}
 	}
 
@@ -98,12 +105,12 @@ public class RdvDAODjbcImpl implements RdvDAO {
 			int nbRows = rqt.executeUpdate();
 			if (nbRows != 1) {
 				conn.rollback();
-				throw new DALException();
+				throw new DALException("[Rdv] delete by code animal failed");
 			} else {
 				conn.commit();
 			}
 		} catch (SQLException e) {
-			throw new DALException();
+			throw new DALException("[Rdv] delete by code animal failed - ", e);
 		}
 	}
 
@@ -123,12 +130,79 @@ public class RdvDAODjbcImpl implements RdvDAO {
 			int nbRows = rqt.executeUpdate();
 			if (nbRows != 1) {
 				conn.rollback();
-				throw new DALException();
+				throw new DALException("[Rdv] delete failed");
 			} else {
 				conn.commit();
 			}
 		} catch (SQLException e) {
-			throw new DALException();
+			throw new DALException("[Rdv] delete failed");
+		}
+	}
+
+	@Override
+	public List<Rdv> selectByCodeVeto(int code) throws DALException {
+		try (Connection conn = JdbcTools.getConnection()) {
+			List<Rdv> rdvs = new ArrayList<Rdv>();
+			PreparedStatement rqt = conn.prepareStatement(sqlSelectByCodeVeto);
+			rqt.setInt(1, code);
+
+			ResultSet rs = rqt.executeQuery();
+			while (rs.next()) {
+				rdvs.add(new Rdv(rs.getInt("CodeVeto"), rs.getDate("DateRdv"), rs.getInt("CodeAnimal")));
+			}
+			return rdvs;
+		} catch (Exception e) {
+			throw new DALException("[Rdv] select by code veto failed - ", e);
+		}
+	}
+
+	@Override
+	public List<Rdv> selectByDate(Date date) throws DALException {
+		try (Connection conn = JdbcTools.getConnection()) {
+			List<Rdv> rdvs = new ArrayList<Rdv>();
+			PreparedStatement rqt = conn.prepareStatement(sqlSelectByCodeVeto);
+			rqt.setDate(1, date);
+
+			ResultSet rs = rqt.executeQuery();
+			while (rs.next()) {
+				rdvs.add(new Rdv(rs.getInt("CodeVeto"), rs.getDate("DateRdv"), rs.getInt("CodeAnimal")));
+			}
+			return rdvs;
+		} catch (Exception e) {
+			throw new DALException("[Rdv] select by date failed - ", e);
+		}
+	}
+
+	@Override
+	public List<Rdv> selectByCodeAnimal(int code) throws DALException {
+		try (Connection conn = JdbcTools.getConnection()) {
+			List<Rdv> rdvs = new ArrayList<Rdv>();
+			PreparedStatement rqt = conn.prepareStatement(sqlSelectByCodeVeto);
+			rqt.setInt(1, code);
+
+			ResultSet rs = rqt.executeQuery();
+			while (rs.next()) {
+				rdvs.add(new Rdv(rs.getInt("CodeVeto"), rs.getDate("DateRdv"), rs.getInt("CodeAnimal")));
+			}
+			return rdvs;
+		} catch (Exception e) {
+			throw new DALException("[Rdv] select by code animal failed - ", e);
+		}
+	}
+
+	@Override
+	public List<Rdv> selectAll() throws DALException {
+		try (Connection conn = JdbcTools.getConnection()) {
+			List<Rdv> rdvs = new ArrayList<Rdv>();
+			PreparedStatement rqt = conn.prepareStatement(sqlSelectByCodeVeto);
+
+			ResultSet rs = rqt.executeQuery();
+			while (rs.next()) {
+				rdvs.add(new Rdv(rs.getInt("CodeVeto"), rs.getDate("DateRdv"), rs.getInt("CodeAnimal")));
+			}
+			return rdvs;
+		} catch (Exception e) {
+			throw new DALException("[Rdv] select all failed - ", e);
 		}
 	}
 

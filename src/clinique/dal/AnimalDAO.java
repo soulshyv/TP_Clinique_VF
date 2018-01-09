@@ -6,17 +6,19 @@ import clinique.models.Animal;;
 
 public interface AnimalDAO {
 	
-	public void insert (Animal animal);
+	public void insert (Animal animal) throws DALException;
 	
-	public void delete (int code);
+	public void delete (int code) throws DALException;
 	
-	public List<Animal> selectAll();
+	public List<Animal> selectAll() throws DALException;
 	
-	public void update();
+	public void update(Animal animal) throws DALException;
 	
-	public List<Animal> selectByRace(String race);
+	public List<Animal> selectByRace(String race) throws DALException;
 	
-	public List<Animal> selectByClient(String codeClient);
+	public List<Animal> selectByClient(int codeClient) throws DALException;
 	
-	public List<Animal> selectByCode(String codeAnimal);
+	public List<Animal> selectByEspece(String espece) throws DALException;
+	
+	public List<Animal> selectByCode(int codeAnimal) throws DALException;
 }

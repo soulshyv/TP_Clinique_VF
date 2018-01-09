@@ -1,6 +1,7 @@
 package clinique.dal;
 
 import java.sql.Date;
+import java.util.List;
 
 import clinique.models.Animal;
 import clinique.models.Client;
@@ -18,4 +19,12 @@ public interface RdvDAO {
 	public void deleteByCodeAnimal(int codeAnimal) throws DALException;
 
 	public void delete(Rdv rdv) throws DALException;
+	
+	public List<Rdv> selectByCodeVeto(int code) throws DALException;
+	
+	public List<Rdv> selectByDate(Date date) throws DALException;
+	
+	public List<Rdv> selectByCodeAnimal(int code) throws DALException;
+	
+	public List<Rdv> selectAll() throws DALException;
 }

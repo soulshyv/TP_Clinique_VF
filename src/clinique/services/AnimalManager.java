@@ -19,7 +19,11 @@ public class AnimalManager {
 	{
 		daoAnimal = DAOFactory.getAnimalDAO();
 		
-		animalListe = daoAnimal.selectAll();
+		try {
+			animalListe = daoAnimal.selectAll();
+		} catch (DALException e) {
+			throw new BLLException("[Animal manager] instanciating failed - ", e);
+		}
 	}
 	
 	public static synchronized AnimalManager getInstance() throws BLLException{	
@@ -29,40 +33,70 @@ public class AnimalManager {
 		return instance;
 	}
 	
-	public List<Animal> getAnimal()
+	public List<Animal> getAnimaux()
 	{
 		return animalListe;
 	}
 	
-	public void addAnimal(Animal newAnimal) throws DALException {
-		daoAnimal.insert(newAnimal);
+	public void ajouterAnimal(Animal newAnimal) throws BLLException {
+		try {
+			daoAnimal.insert(newAnimal);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//this.setChanged();
 		//this.notifyObservers();
 	}
 	
-	public void removeAnimal(int index) throws DALException {
-		daoAnimal.delete(index);
+	public void supprimerAnimal(int index) throws BLLException {
+		try {
+			daoAnimal.delete(index);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//this.setChanged();
 		//this.notifyObservers();
 	}
 	
-	public List<Animal> selctebyCode(String code) throws DALException
+	public List<Animal> rechercherAnimalParCode(int code) throws BLLException
 	{
-		return daoAnimal.selectByCode(code);
+		try {
+			return daoAnimal.selectByCode(code);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public List<Animal> selctebyRace(String race) throws DALException
+	public List<Animal> rechercherAnimalParRace(String race) throws BLLException
 	{
-		return daoAnimal.selectByRace(race);
+		try {
+			return daoAnimal.selectByRace(race);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public List<Animal> selctebyClient(String codeClient) throws DALException
+	public List<Animal> rechercherAnimalParClient(int codeClient) throws BLLException
 	{
-		return daoAnimal.selectByClient(codeClient);
+		try {
+			return daoAnimal.selectByClient(codeClient);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public List<Animal> selectByEspece(String espece) throws DALException
+	public List<Animal> rechercherParEspece(String espece) throws BLLException
 	{
-		return daoAnimal.selectByClient(espece);
+		try {
+			return daoAnimal.selectByEspece(espece);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

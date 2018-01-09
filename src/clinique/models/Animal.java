@@ -12,12 +12,6 @@ public class Animal {
 	private boolean archive;
 	private Client maitre;
 	
-	public Client getMaitre() {
-		return maitre;
-	}
-	public void setMaitre(Client maitre) {
-		this.maitre = maitre;
-	}
 	public String getNom() {
 		return nom;
 	}
@@ -72,8 +66,14 @@ public class Animal {
 	public void setArchive(boolean archive) {
 		this.archive = archive;
 	}
+	public Client getMaitre() {
+		return maitre;
+	}
+	public void setMaitre(Client maitre) {
+		this.maitre = maitre;
+	}
 	
-	public Animal(String nom, String race, int code, String sexe,
+	public Animal(int code, String nom, String race, String sexe,
 			String couleur, String espece, String tatouage, String antecedent,
 			boolean archive) {
 		this.nom = nom;
@@ -86,7 +86,7 @@ public class Animal {
 		this.antecedent = antecedent;
 		this.archive = archive;
 	}
-	public Animal(String nom, String race, int code, String sexe,
+	public Animal(int code, String nom, String race, String sexe,
 			String couleur, String espece, String tatouage, String antecedent,
 			boolean archive, Client maitre) {
 		this.nom = nom;

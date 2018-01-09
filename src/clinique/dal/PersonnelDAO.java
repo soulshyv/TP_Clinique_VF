@@ -6,14 +6,14 @@ import clinique.models.Personnel;
 
 public interface PersonnelDAO {
 
-	public abstract List<Personnel> selectAll();
+	public abstract List<Personnel> selectAll() throws DALException;
 
-	public abstract List<Personnel> selectByNom(String nom);
+	public abstract List<Personnel> selectByNom(String nom) throws DALException;
 
-	public abstract void delete(int code);
+	public abstract void delete(int code) throws DALException;
 
-	public abstract void insert(Personnel perso);
+	public abstract void insert(Personnel perso) throws DALException;
 
-	public abstract void updatePwd(String CodePers, String pwd);
+	public abstract void updatePwd(String CodePers, String pwd) throws DALException;
 
 }
