@@ -35,7 +35,7 @@ public class PersonnelManager {
 		return instance;
 	}
 	
-	public List<Personnel> getPerso()
+	public List<Personnel> getPersonnel()
 	{
 		return persoListe;
 	}
