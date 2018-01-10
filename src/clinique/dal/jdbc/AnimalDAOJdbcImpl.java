@@ -4,14 +4,12 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import clinique.dal.AnimalDAO;
 import clinique.dal.DALException;
 import clinique.models.Animal;
-import clinique.services.BLLException;
 import clinique.services.ClientManager;
 
 public class AnimalDAOJdbcImpl implements AnimalDAO {
@@ -50,7 +48,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 			}
 
 		} catch (Exception e) {
-			throw new DALException("[Animal] insert failed - ", e);
+			throw new DALException("[Animal] insert failed - " + e.getMessage());
 		}
 
 	}
@@ -73,7 +71,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 			}
 
 		} catch (Exception e) {
-			throw new DALException("[Animal] delete failed - ", e);
+			throw new DALException("[Animal] delete failed - " + e.getMessage());
 		}
 	}
 
@@ -100,7 +98,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				liste.add(animal);
 			}
 		} catch (Exception e) {
-			throw new DALException("[Animal] select all failed - ", e);
+			throw new DALException("[Animal] select all failed - " + e.getMessage());
 		}
 		
 		return liste;
@@ -133,7 +131,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 			}
 
 		} catch (Exception e) {
-			throw new DALException("[Animal] update failed - ", e);
+			throw new DALException("[Animal] update failed - " + e.getMessage());
 		}
 	}
 
@@ -161,7 +159,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				liste.add(animal);
 			}
 		} catch (Exception e) {
-			throw new DALException("[Animal] select by race failed - ", e);
+			throw new DALException("[Animal] select by race failed - " + e.getMessage());
 		}
 		return liste;
 	}
@@ -190,7 +188,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				liste.add(animal);
 			}
 		} catch (Exception e) {
-			throw new DALException("[Animal] select by client failed - ", e);
+			throw new DALException("[Animal] select by client failed - " + e.getMessage());
 		}
 		
 		return liste;
@@ -220,7 +218,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				liste.add(animal);
 			}
 		} catch (Exception e) {
-			throw new DALException("[Animal] select by espece failed - ", e);
+			throw new DALException("[Animal] select by espece failed - " + e.getMessage());
 		}
 		
 		return liste;
@@ -251,7 +249,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				liste.add(animal);
 			}
 		} catch (Exception e) {
-			throw new DALException("[Animal] select by code failed - ", e);
+			throw new DALException("[Animal] select by code failed - " + e.getMessage());
 		}
 		
 		return liste;

@@ -3,7 +3,6 @@ package clinique.ihm.connexion;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,9 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import clinique.services.BLLException;
 import clinique.services.PersonnelManager;
 
+@SuppressWarnings("serial")
 public class JPanelConnexion extends JPanel {
 	public JFrame Parent;
 	
@@ -31,6 +30,12 @@ public class JPanelConnexion extends JPanel {
 	public JPanelConnexion(JFrame parent){
 		Parent = parent;
 		
+		initializeComponents();
+    	
+    	initializeListener(parent);
+	}
+
+	private void initializeComponents() {
 		GridBagConstraints gbc = new GridBagConstraints();
     	gbc.insets = new Insets(5, 5, 5, 5);
     	gbc.gridx = 0;
@@ -39,12 +44,10 @@ public class JPanelConnexion extends JPanel {
     	this.setLayout(new GridBagLayout());
     	
     	JLabel textLabelConnexion = new JLabel("Nom");
-    	this.TextInputConnexion = new JTextField();
-    	TextInputConnexion.setColumns(15);
+    	this.TextInputConnexion = new JTextField(15);
     	
     	JLabel textLabelMotDePasse = new JLabel("Mot de passe");
     	this.TextInputMotDePasse = new JPasswordField(15);
-    	TextInputMotDePasse.setColumns(15);
     	
     	this.JButtonValider = new JButton("Valider");
     	
@@ -67,8 +70,10 @@ public class JPanelConnexion extends JPanel {
     	gbc.gridx = 1;
     	gbc.gridy = 2;
     	this.add(JButtonValider, gbc);
-    	
-    	JButtonValider.addActionListener(new ActionListener() {
+	}
+
+	private void initializeListener(JFrame parent) {
+		JButtonValider.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

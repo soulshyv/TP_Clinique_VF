@@ -25,7 +25,7 @@ public class RdvManager {
 		try {
 			rdvs = daoRdv.selectAll();
 		} catch (DALException e) {
-			throw new BLLException("[Rdv manager] instanciating failed - ", e);
+			throw new BLLException("[Rdv manager] instanciating failed - " + e.getMessage());
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class RdvManager {
 		try {
 			daoRdv.insert(client, animal, veto, date);
 		} catch (DALException e) {
-			throw new BLLException("[Rdv manager] ajouter rdv failed - ", e);
+			throw new BLLException("[Rdv manager] ajouter rdv failed - " + e.getMessage());
 		}
 	}
 	
@@ -55,7 +55,7 @@ public class RdvManager {
 		try {
 			daoRdv.deleteByCodeVeto(code);
 		} catch (DALException e) {
-			throw new BLLException("[Rdv manager] supprimer rdv par code veto failed - ", e);
+			throw new BLLException("[Rdv manager] supprimer rdv par code veto failed - " + e.getMessage());
 		}
 	}
 	
@@ -67,7 +67,7 @@ public class RdvManager {
 		try {
 			daoRdv.deleteByDate(date);
 		} catch (DALException e) {
-			throw new BLLException("[Rdv manager] supprimer rdv par code veto failed - ", e);
+			throw new BLLException("[Rdv manager] supprimer rdv par code veto failed - " + e.getMessage());
 		}
 	}
 	
@@ -79,7 +79,7 @@ public class RdvManager {
 		try {
 			daoRdv.deleteByCodeVeto(code);
 		} catch (DALException e) {
-			throw new BLLException("[Rdv manager] supprimer rdv par code animal failed - ", e);
+			throw new BLLException("[Rdv manager] supprimer rdv par code animal failed - " + e.getMessage());
 		}
 	}
 	
@@ -91,7 +91,7 @@ public class RdvManager {
 		try {
 			return daoRdv.selectByCodeVeto(code);
 		} catch (DALException e) {
-			throw new BLLException("[Rdv manager] rechercher rdv par code veto failed - ", e);
+			throw new BLLException("[Rdv manager] rechercher rdv par code veto failed - " + e.getMessage());
 		}
 	}
 	
@@ -103,7 +103,7 @@ public class RdvManager {
 		try {
 			return daoRdv.selectByDate(date);
 		} catch (DALException e) {
-			throw new BLLException("[Rdv manager] rechercher rdv par date failed - ", e);
+			throw new BLLException("[Rdv manager] rechercher rdv par date failed - " + e.getMessage());
 		}
 	}
 	
@@ -115,7 +115,7 @@ public class RdvManager {
 		try {
 			return daoRdv.selectByCodeAnimal(code);
 		} catch (DALException e) {
-			throw new BLLException("[Rdv manager] rechercher rdv par code animal failed - ", e);
+			throw new BLLException("[Rdv manager] rechercher rdv par code animal failed - " + e.getMessage());
 		}
 	}
 	
@@ -124,7 +124,7 @@ public class RdvManager {
 		try {
 			return daoRdv.selectAll();
 		} catch (DALException e) {
-			throw new BLLException("[Rdv manager] rechercher tous rdvs failed - ", e);
+			throw new BLLException("[Rdv manager] rechercher tous rdvs failed - " + e.getMessage());
 		}
 	}
 }
