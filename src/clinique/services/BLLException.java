@@ -7,10 +7,6 @@ public class BLLException extends Exception {
 		super(message);
 	}
 
-	public BLLException(String message, Throwable exception) {
-		super(message, exception);
-	}
-
 	@Override
 	public String getMessage() {
 		

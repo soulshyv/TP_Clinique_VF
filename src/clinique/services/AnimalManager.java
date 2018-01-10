@@ -22,7 +22,7 @@ public class AnimalManager {
 		try {
 			animalListe = daoAnimal.selectAll();
 		} catch (DALException e) {
-			throw new BLLException("[Animal manager] instanciating failed - ", e);
+			throw new BLLException("[Animal manager] instanciating failed - " + e.getMessage());
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class AnimalManager {
 		try {
 			daoAnimal.insert(newAnimal);
 		} catch (DALException e) {
-			throw new BLLException("[Animal manager] instanciating failed - ", e);
+			throw new BLLException("[Animal manager] instanciating failed - " + e.getMessage());
 		}
 		//this.setChanged();
 		//this.notifyObservers();
@@ -52,7 +52,7 @@ public class AnimalManager {
 		try {
 			daoAnimal.delete(index);
 		} catch (DALException e) {
-			throw new BLLException("[Animal manager] supprimer animal failed - ", e);
+			throw new BLLException("[Animal manager] supprimer animal failed - " + e.getMessage());
 		}
 		//this.setChanged();
 		//this.notifyObservers();
@@ -62,7 +62,7 @@ public class AnimalManager {
 		try {
 			daoAnimal.update(animal);
 		} catch (DALException e) {
-			throw new BLLException("[Animal manager] changer infos animal failed - ", e);
+			throw new BLLException("[Animal manager] changer infos animal failed - " + e.getMessage());
 		}
 	}
 	
@@ -71,7 +71,7 @@ public class AnimalManager {
 		try {
 			return daoAnimal.selectByCode(code);
 		} catch (DALException e) {
-			throw new BLLException("[Animal manager] rechercher animal par code failed - ", e);
+			throw new BLLException("[Animal manager] rechercher animal par code failed - " + e.getMessage());
 		}
 	}
 	
@@ -80,7 +80,7 @@ public class AnimalManager {
 		try {
 			return daoAnimal.selectByRace(race);
 		} catch (DALException e) {
-			throw new BLLException("[Animal manager] rechercher animal par race failed - ", e);
+			throw new BLLException("[Animal manager] rechercher animal par race failed - " + e.getMessage());
 		}
 	}
 	
@@ -89,7 +89,7 @@ public class AnimalManager {
 		try {
 			return daoAnimal.selectByClient(codeClient);
 		} catch (DALException e) {
-			throw new BLLException("[Animal manager] rechercher animal par client failed - ", e);
+			throw new BLLException("[Animal manager] rechercher animal par client failed - " + e.getMessage());
 		}
 	}
 	
@@ -98,7 +98,7 @@ public class AnimalManager {
 		try {
 			return daoAnimal.selectByEspece(espece);
 		} catch (DALException e) {
-			throw new BLLException("[Animal manager] rechercher animal par espece failed - ", e);
+			throw new BLLException("[Animal manager] rechercher animal par espece failed - " + e.getMessage());
 		}
 	}
 	
@@ -107,7 +107,7 @@ public class AnimalManager {
 		try {
 			return daoAnimal.selectAll();
 		} catch (DALException e) {
-			throw new BLLException("[Animal manager] rechercher tous les animaux failed - ", e);
+			throw new BLLException("[Animal manager] rechercher tous les animaux failed - " + e.getMessage());
 		}
 	}
 }

@@ -7,8 +7,13 @@ import javax.swing.JOptionPane;
 
 import clinique.dal.jdbc.JdbcTools;
 
+@SuppressWarnings("serial")
 public class FenetreConnexion  extends JFrame {
 	public FenetreConnexion() {
+		initializeComponents();
+	}
+
+	private void initializeComponents() {
 		JPanelConnexion connexionPanel = new JPanelConnexion(this);
 		
 		try {

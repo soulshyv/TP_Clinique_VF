@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import clinique.dal.DALException;
 import clinique.dal.DAOFactory;
 import clinique.dal.PersonnelDAO;
 import clinique.ihm.gestionPersonnel.EcranGestionPersonnel;
@@ -25,7 +24,7 @@ public class PersonnelManager {
 		try {
 			persoListe = daoPerso.selectAll();
 		} catch (Exception e) {
-			throw new BLLException("[Personnel manager] instanciating failed - ", e);
+			throw new BLLException("[Personnel manager] instanciating failed - " + e.getMessage());
 		}
 	}
 	
@@ -48,7 +47,7 @@ public class PersonnelManager {
 		try {
 			return daoPerso.selectByNom(nom);
 		} catch (Exception e) {
-			throw new BLLException("[Personnel manager] rechercher par nom failed - ", e);
+			throw new BLLException("[Personnel manager] rechercher par nom failed - " + e.getMessage());
 		}
 	}
 	
@@ -57,7 +56,7 @@ public class PersonnelManager {
 		try {
 			return daoPerso.selectAll();
 		} catch (Exception e) {
-			throw new BLLException("[Personnel manager] rechercher tous les employes failed - ", e);
+			throw new BLLException("[Personnel manager] rechercher tous les employes failed - " + e.getMessage());
 		}
 	}
 	
@@ -66,7 +65,7 @@ public class PersonnelManager {
 		try {
 			daoPerso.updatePwd(codeEmp, pwd);
 		} catch (Exception e) {
-			throw new BLLException("[Personnel manager] changer mot de passe failed - ", e);
+			throw new BLLException("[Personnel manager] changer mot de passe failed - " + e.getMessage());
 		}
 	}
 	
@@ -74,7 +73,7 @@ public class PersonnelManager {
 		try {
 			daoPerso.insert(perso);
 		} catch (Exception e) {
-			throw new BLLException("[Personnel manager] ajouter employe failed - ", e);
+			throw new BLLException("[Personnel manager] ajouter employe failed - " + e.getMessage());
 		}
 		//this.setChanged();
 		//this.notifyObservers();
@@ -84,7 +83,7 @@ public class PersonnelManager {
 		try {
 			daoPerso.delete(code);
 		} catch (Exception e) {
-			throw new BLLException("[Personnel manager] supprimer employe failed - ", e);
+			throw new BLLException("[Personnel manager] supprimer employe failed - " + e.getMessage());
 		}
 		//this.setChanged();
 		//this.notifyObservers();

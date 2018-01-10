@@ -21,7 +21,7 @@ public class ClientManager {
 		try {
 			clients = daoClient.selectAll();
 		} catch (Exception e) {
-			throw new BLLException("[Client manager] instanciating failed - ", e);
+			throw new BLLException("[Client manager] instanciating failed - " + e.getMessage());
 		}
 	}
 	
@@ -41,7 +41,7 @@ public class ClientManager {
 		try {
 			daoClient.insert(client);
 		} catch (DALException e) {
-			throw new BLLException("[ClientManager] ajouter client failed - ", e);
+			throw new BLLException("[ClientManager] ajouter client failed - " + e.getMessage());
 		}
 	}
 	
@@ -53,7 +53,7 @@ public class ClientManager {
 		try {
 			daoClient.deleteByCode(code);
 		} catch (DALException e) {
-			throw new BLLException("[ClientManager] supprimer client par code failed - ", e);
+			throw new BLLException("[ClientManager] supprimer client par code failed - " + e.getMessage());
 		}
 	}
 
@@ -65,7 +65,7 @@ public class ClientManager {
 		try {
 			return daoClient.selectByCode(code);
 		} catch (DALException e) {
-			throw new BLLException("[ClientManager] rechercher client par code failed - ", e);
+			throw new BLLException("[ClientManager] rechercher client par code failed - " + e.getMessage());
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class ClientManager {
 		try {
 			return daoClient.selectByNom(nom);
 		} catch (DALException e) {
-			throw new BLLException("[ClientManager] rechercher client par nom failed - ", e);
+			throw new BLLException("[ClientManager] rechercher client par nom failed - " + e.getMessage());
 		}
 	}
 	
@@ -86,7 +86,7 @@ public class ClientManager {
 		try {
 			return daoClient.selectAll();
 		} catch (DALException e) {
-			throw new BLLException("[ClientManager] rechercher tous les clients failed - ", e);
+			throw new BLLException("[ClientManager] rechercher tous les clients failed - " + e.getMessage());
 		}
 	}
 }

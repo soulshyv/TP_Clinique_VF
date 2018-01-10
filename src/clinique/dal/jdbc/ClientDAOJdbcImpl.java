@@ -18,7 +18,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 	private final String sqlInsert = "{CALL ajout_client(?,?,?,?,?,?,?,?,?,?)}";
 	private final String sqlDelete = "DELETE FROM clients WHERE CodeClient=?";
 	private final String sqlSelectByCode = "SELECT * FROM clients WHERE CodeClient=?";
-	private final String sqlSelectNom = "SELECT * FROM clients WHERE NomClient=?";
+	private final String sqlSelectByNom = "SELECT * FROM clients WHERE NomClient=?";
 	private final String sqlSelectAll = "SELECT * FROM clients";
 
 	@Override
@@ -45,7 +45,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 				conn.commit();
 			}
 		} catch (Exception e) {
-			throw new DALException("[Client] insert failed - ", e);
+			throw new DALException("[Client] insert failed - " + e.getMessage());
 		}
 	}
 
@@ -65,7 +65,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 				conn.commit();
 			}
 		} catch (Exception e) {
-			throw new DALException("[Client] delete by code failed - ", e);
+			throw new DALException("[Client] delete by code failed - " + e.getMessage());
 		}
 	}
 
@@ -87,7 +87,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 						rs.getString("Remarque"), rs.getBoolean("Archive"));
 			}
 		} catch (Exception e) {
-			throw new DALException("[Client] select by code failde - ", e);
+			throw new DALException("[Client] select by code failde - " + e.getMessage());
 		}
 		return null;
 	}
@@ -96,7 +96,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 	public List<Client> selectByNom(String nom) throws DALException {
 		try (Connection conn = JdbcTools.getConnection()) {
 
-			PreparedStatement rqt = conn.prepareStatement(sqlSelectByCode);
+			PreparedStatement rqt = conn.prepareStatement(sqlSelectByNom);
 			rqt.setString(1, nom);
 
 			ResultSet rs = rqt.executeQuery();
@@ -114,7 +114,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 
 			return clients;
 		} catch (Exception e) {
-			throw new DALException("[Client] select by nom failed - ", e);
+			throw new DALException("[Client] select by nom failed - " + e.getMessage());
 		}
 	}
 
@@ -124,7 +124,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 
 			Statement rqt = conn.createStatement();
 
-			ResultSet rs = rqt.executeQuery(sqlSelectByCode);
+			ResultSet rs = rqt.executeQuery(sqlSelectAll);
 
 			List<Client> clients = new ArrayList<Client>();
 			while (rs.next()) {
@@ -139,7 +139,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 
 			return clients;
 		} catch (Exception e) {
-			throw new DALException("[Client] select all failed - ", e);
+			throw new DALException("[Client] select all failed - " + e.getMessage());
 		}
 	}
 
