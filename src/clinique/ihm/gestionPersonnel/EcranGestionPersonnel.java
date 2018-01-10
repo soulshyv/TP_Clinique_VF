@@ -2,11 +2,11 @@ package clinique.ihm.gestionPersonnel;
 
 import javax.swing.JFrame;
 
-import fr.eni.papeterie.bll.BLLException;
+import clinique.services.BLLException;
 
 public class EcranGestionPersonnel extends JFrame {
 
-	public EcranGestionPersonnel() {
+	public EcranGestionPersonnel() throws BLLException {
 		JPanelGestionPersonnel mainPanel = new JPanelGestionPersonnel();
     	
 		this.add(mainPanel);
