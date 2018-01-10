@@ -42,8 +42,7 @@ public class AnimalManager {
 		try {
 			daoAnimal.insert(newAnimal);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BLLException("[Animal manager] instanciating failed - ", e);
 		}
 		//this.setChanged();
 		//this.notifyObservers();
@@ -53,11 +52,18 @@ public class AnimalManager {
 		try {
 			daoAnimal.delete(index);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BLLException("[Animal manager] supprimer animal failed - ", e);
 		}
 		//this.setChanged();
 		//this.notifyObservers();
+	}
+	
+	public void changerInfosAnimal(Animal animal) throws BLLException {
+		try {
+			daoAnimal.update(animal);
+		} catch (DALException e) {
+			throw new BLLException("[Animal manager] changer infos animal failed - ", e);
+		}
 	}
 	
 	public List<Animal> rechercherAnimalParCode(int code) throws BLLException
@@ -65,8 +71,7 @@ public class AnimalManager {
 		try {
 			return daoAnimal.selectByCode(code);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BLLException("[Animal manager] rechercher animal par code failed - ", e);
 		}
 	}
 	
@@ -75,8 +80,7 @@ public class AnimalManager {
 		try {
 			return daoAnimal.selectByRace(race);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BLLException("[Animal manager] rechercher animal par race failed - ", e);
 		}
 	}
 	
@@ -85,18 +89,25 @@ public class AnimalManager {
 		try {
 			return daoAnimal.selectByClient(codeClient);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BLLException("[Animal manager] rechercher animal par client failed - ", e);
 		}
 	}
 	
-	public List<Animal> rechercherParEspece(String espece) throws BLLException
+	public List<Animal> rechercherAnimalParEspece(String espece) throws BLLException
 	{
 		try {
 			return daoAnimal.selectByEspece(espece);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BLLException("[Animal manager] rechercher animal par espece failed - ", e);
+		}
+	}
+	
+	public List<Animal> rechercherTousLesAnimaux() throws BLLException
+	{
+		try {
+			return daoAnimal.selectAll();
+		} catch (DALException e) {
+			throw new BLLException("[Animal manager] rechercher tous les animaux failed - ", e);
 		}
 	}
 }

@@ -10,9 +10,9 @@ public interface AnimalDAO {
 	
 	public void delete (int code) throws DALException;
 	
-	public List<Animal> selectAll() throws DALException;
-	
 	public void update(Animal animal) throws DALException;
+	
+	public List<Animal> selectAll() throws DALException;
 	
 	public List<Animal> selectByRace(String race) throws DALException;
 	

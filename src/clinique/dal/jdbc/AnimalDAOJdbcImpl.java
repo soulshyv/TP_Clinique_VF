@@ -23,6 +23,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	private final String sqlSelectByEspece = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, Race, Espece, CodeClient, Tatouage, Antecedents, Archive FROM Animaux WHERE Espece = ?";
 	private final String sqlSelectByCode = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, Race, Espece, CodeClient, Tatouage, Antecedents, Archive FROM Animaux WHERE CodeClient = ?";
 	private final String sqlSelectByCodeAnimal = "SELECT CodeAnimal, NomAnimal, Sexe, Couleur, Race, Espece, CodeClient, Tatouage, Antecedents, Archive FROM Animaux WHERE CodeAnimal = ?";
+	private final String sqlUpdate = "UPDATE Animal SET NomAnimal=?, Sexe=?, Couleur=?, Race=?, Espece=?, CodeClient=?, Tatouage=?, Antecedents=?, Archive=? WHERE CodeAnimal=?";
 
 	@Override
 	public void insert(Animal animal) throws DALException {
@@ -74,7 +75,6 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 		} catch (Exception e) {
 			throw new DALException("[Animal] delete failed - ", e);
 		}
-
 	}
 
 	@Override
@@ -108,8 +108,33 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 
 	@Override
 	public void update(Animal animal) throws DALException {
-		// TODO Auto-generated method stub
+		try (Connection cnx = JdbcTools.getConnection();
+				CallableStatement rqt = cnx.prepareCall(sqlUpdate);) {
 
+			cnx.setAutoCommit(false);
+			rqt.setString(1, animal.getNom());
+			rqt.setString(2, animal.getSexe());
+			rqt.setString(3, animal.getCouleur());
+			rqt.setString(4, animal.getRace());
+			rqt.setString(5, animal.getEspece());
+			rqt.setInt(6, animal.getMaitre().getCode());
+			rqt.setString(7, animal.getTatouage());
+			rqt.setString(8, animal.getAntecedent());
+			rqt.setBoolean(9, animal.isArchive());
+			rqt.setInt(1, animal.getCode());
+
+			int nbRows = rqt.executeUpdate();
+
+			if (nbRows != 1) {
+				cnx.rollback();
+				throw new DALException("[Animal] update failed");
+			} else {
+				cnx.commit();
+			}
+
+		} catch (Exception e) {
+			throw new DALException("[Animal] update failed - ", e);
+		}
 	}
 
 	@Override
