@@ -56,10 +56,6 @@ public class Animal {
 		return couleur;
 	}
 	public void setCouleur(String couleur) throws Exception {
-		if (couleur.equals("") || couleur.equals(null))
-		{
-			throw new Exception("couleur invalide");
-		}
 		this.couleur = couleur;
 	}
 	public String getEspece() {
@@ -76,20 +72,12 @@ public class Animal {
 		return tatouage;
 	}
 	public void setTatouage(String tatouage) throws Exception {
-		if (tatouage.equals("") || tatouage.equals(null))
-		{
-			throw new Exception("tatouage invalide");
-		}
 		this.tatouage = tatouage;
 	}
 	public String getAntecedent() {
 		return antecedent;
 	}
 	public void setAntecedent(String antecedent) throws Exception {
-		if (antecedent.equals("") || antecedent.equals(null))
-		{
-			throw new Exception("sexe invalide");
-		}
 		this.antecedent = antecedent;
 	}
 	public boolean isArchive() {

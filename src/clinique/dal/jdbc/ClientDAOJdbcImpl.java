@@ -95,11 +95,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 	public List<Client> selectByNom(String nom) throws DALException {
 		try (Connection conn = JdbcTools.getConnection()) {
 
-<<<<<<< HEAD
-			PreparedStatement rqt = conn.prepareStatement(sqlSelectNom);
-=======
 			PreparedStatement rqt = conn.prepareStatement(sqlSelectByNom);
->>>>>>> origin/master
 			rqt.setString(1, nom);
 
 			ResultSet rs = rqt.executeQuery();
@@ -127,11 +123,8 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 
 			PreparedStatement rqt = conn.prepareStatement(sqlSelectAll);
 
-<<<<<<< HEAD
+
 			ResultSet rs = rqt.executeQuery();
-=======
-			ResultSet rs = rqt.executeQuery(sqlSelectAll);
->>>>>>> origin/master
 
 			List<Client> clients = new ArrayList<Client>();
 			while (rs.next()) {

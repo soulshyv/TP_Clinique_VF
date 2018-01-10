@@ -102,10 +102,10 @@ public class PersonnelManager {
 				switch(p.getRole())
 				{
 					case "sec":
-						break;
+						return new FenetreClient();
 						
 					case "vet":
-						return new FenetreClient();
+						break;
 						
 					case "adm":
 						return new EcranGestionPersonnel();

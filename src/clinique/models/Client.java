@@ -55,10 +55,6 @@ public class Client {
 	}
 
 	public void setAdresse1(String adresse1) throws Exception {
-		if (adresse1.equals("") || adresse1.equals(null))
-		{
-			throw new Exception("Adresse invalide");
-		}
 		this.adresse1 = adresse1;
 	}
 
@@ -67,10 +63,6 @@ public class Client {
 	}
 
 	public void setAdresse2(String adresse2) throws Exception {
-		if (adresse2.equals("") || adresse2.equals(null))
-		{
-			throw new Exception("Adresse invalide");
-		}
 		this.adresse2 = adresse2;
 	}
 
@@ -103,10 +95,6 @@ public class Client {
 	}
 
 	public void setNumTel(String numTel) throws Exception {
-		if (numTel.equals("") || numTel.equals(null))
-		{
-			throw new Exception("Numero téléphone invalide");
-		}
 		this.numTel = numTel;
 	}
 
@@ -115,10 +103,6 @@ public class Client {
 	}
 
 	public void setAssurance(String assurance) throws Exception{
-		if (assurance.equals("") || assurance.equals(null))
-		{
-			throw new Exception("Assurance invalide");
-		}
 		this.assurance = assurance;
 	}
 
@@ -127,10 +111,6 @@ public class Client {
 	}
 
 	public void setEmail(String email) throws Exception {
-		if (email.equals("") || email.equals(null))
-		{
-			throw new Exception("Email invalide");
-		}
 		this.email = email;
 	}
 
@@ -139,10 +119,6 @@ public class Client {
 	}
 
 	public void setRemarque(String remarque) throws Exception {
-		if (remarque.equals("") || remarque.equals(null))
-		{
-			throw new Exception("Nom invalide");
-		}
 		this.remarque = remarque;
 	}
 
