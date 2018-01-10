@@ -28,8 +28,9 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public List<Personnel> selectAll() throws DALException {
 		List<Personnel> liste = new ArrayList<Personnel>();
 		try (Connection cnx = JdbcTools.getConnection();
-				PreparedStatement rqt = cnx.prepareStatement(sqlSelectAll);
-				ResultSet rs = rqt.executeQuery(sqlSelectAll);){
+				PreparedStatement rqt = cnx.prepareStatement(sqlSelectAll);){
+			
+			ResultSet rs = rqt.executeQuery();
 			
 			Personnel perso = null;
 
@@ -54,11 +55,12 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	public List<Personnel> selectByNom(String nom) throws DALException {
 		List<Personnel> liste = new ArrayList<Personnel>();
 		try (Connection cnx = JdbcTools.getConnection();
-				PreparedStatement rqt = cnx.prepareStatement(sqlSelectByNom);
-				ResultSet rs = rqt.executeQuery(sqlSelectByNom);){
+				PreparedStatement rqt = cnx.prepareStatement(sqlSelectByNom);){
 			
 			Personnel perso = null;
 			rqt.setString(1, nom);
+			
+			ResultSet rs = rqt.executeQuery();
 
 			while (rs.next()) {
 

@@ -2,9 +2,12 @@ package clinique.services;
 
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import clinique.dal.DALException;
 import clinique.dal.DAOFactory;
 import clinique.dal.PersonnelDAO;
+import clinique.ihm.gestionPersonnel.EcranGestionPersonnel;
 import clinique.models.Personnel;
 
 public class PersonnelManager {
@@ -21,7 +24,7 @@ public class PersonnelManager {
 		
 		try {
 			persoListe = daoPerso.selectAll();
-		} catch (DALException e) {
+		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] instanciating failed - ", e);
 		}
 	}
@@ -44,8 +47,8 @@ public class PersonnelManager {
 	{
 		try {
 			return daoPerso.selectByNom(nom);
-		} catch (DALException e) {
-			throw new BLLException("[Personnel manager] instanciating failed - ", e);
+		} catch (Exception e) {
+			throw new BLLException("[Personnel manager] rechercher par nom failed - ", e);
 		}
 	}
 	
@@ -53,7 +56,7 @@ public class PersonnelManager {
 	{
 		try {
 			return daoPerso.selectAll();
-		} catch (DALException e) {
+		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] rechercher tous les employes failed - ", e);
 		}
 	}
@@ -62,7 +65,7 @@ public class PersonnelManager {
 	{
 		try {
 			daoPerso.updatePwd(codeEmp, pwd);
-		} catch (DALException e) {
+		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] changer mot de passe failed - ", e);
 		}
 	}
@@ -70,7 +73,7 @@ public class PersonnelManager {
 	public void ajouterEmploye(Personnel perso) throws BLLException {
 		try {
 			daoPerso.insert(perso);
-		} catch (DALException e) {
+		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] ajouter employe failed - ", e);
 		}
 		//this.setChanged();
@@ -80,10 +83,39 @@ public class PersonnelManager {
 	public void supprimerEmploye(int code) throws BLLException {
 		try {
 			daoPerso.delete(code);
-		} catch (DALException e) {
+		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] supprimer employe failed - ", e);
 		}
 		//this.setChanged();
 		//this.notifyObservers();
+	}
+	
+	public JFrame ConnexionEmploye(String nom, String mdp) throws BLLException {
+		List<Personnel> pers = rechercherParNom(nom);
+		if(pers.size() < 1)
+			throw new BLLException("Nom invalide");
+		
+		for(Personnel p : pers)
+		{
+			if(p.getMdp().trim().equals(mdp.trim()))
+			{
+				switch(p.getRole())
+				{
+					case "sec":
+						break;
+						
+					case "vet":
+						break;
+						
+					case "adm":
+						return new EcranGestionPersonnel();
+						
+					default:
+						throw new BLLException("Vous n'avez pas les permissions requises");
+				}
+			}
+		}
+		
+		return null;
 	}
 }

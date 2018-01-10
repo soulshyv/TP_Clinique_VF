@@ -8,12 +8,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import clinique.services.BLLException;
+import clinique.services.PersonnelManager;
+
 public class JPanelConnexion extends JPanel {
+	public JFrame Parent;
 	
 	public JTextField TextInputConnexion;
 	
@@ -22,7 +28,9 @@ public class JPanelConnexion extends JPanel {
 	public JButton JButtonValider;
 	
 	
-	public JPanelConnexion(){
+	public JPanelConnexion(JFrame parent){
+		Parent = parent;
+		
 		GridBagConstraints gbc = new GridBagConstraints();
     	gbc.insets = new Insets(5, 5, 5, 5);
     	gbc.gridx = 0;
@@ -64,9 +72,21 @@ public class JPanelConnexion extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					if(TextInputConnexion.getText().trim() == "" || String.valueOf(TextInputMotDePasse.getPassword()).trim() == "")
+						throw new Exception("Veuillez renseigner tous les champs");
+						
+					PersonnelManager PersMng = PersonnelManager.getInstance();
+					JFrame ecr = PersMng.ConnexionEmploye(TextInputConnexion.getText(), String.valueOf(TextInputMotDePasse.getPassword()));
+					if(ecr == null)
+						throw new Exception("Identifiants de connexion erronés");
+					
+					parent.dispose();
+					ecr.setVisible(true);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(parent, ex.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-    	
 	}
 }

@@ -6,20 +6,23 @@ import java.awt.GridBagLayout;
 import java.awt.ScrollPane;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 
-import clinique.ihm.error.EcranErreur;
 import clinique.models.Personnel;
 import clinique.services.BLLException;
 import clinique.services.PersonnelManager;
 
 public class JPanelListeEmployes extends JPanel {
+	JFrame Parent;
 	public JScrollPane ScrollPane;
 	
-	public JPanelListeEmployes() {
+	public JPanelListeEmployes(JFrame parent) {
+		Parent = parent;
 		this.setLayout(new GridBagLayout());
 		try {
 			PersonnelManager persMng = PersonnelManager.getInstance();
@@ -31,7 +34,8 @@ public class JPanelListeEmployes extends JPanel {
 			{
 				tabDonnees[i][0] = String.valueOf(pers.getNom());
 				tabDonnees[i][1] = String.valueOf(pers.getRole());
-				tabDonnees[i][1] = String.valueOf(pers.getMdp());
+				tabDonnees[i][2] = String.valueOf(pers.getMdp());
+				i++;
 			}
 			String[] columnNames = {"Nom ",
 	                "Role",
@@ -42,7 +46,7 @@ public class JPanelListeEmployes extends JPanel {
 			ScrollPane.setPreferredSize(new Dimension(700, 480));
 			this.add(ScrollPane);
 		} catch (BLLException e) {
-			EcranErreur ecrErr = new EcranErreur(e);
+			JOptionPane.showMessageDialog(parent, e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
