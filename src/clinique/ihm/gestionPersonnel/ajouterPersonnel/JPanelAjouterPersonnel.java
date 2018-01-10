@@ -3,9 +3,11 @@ package clinique.ihm.gestionPersonnel.ajouterPersonnel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,7 +21,10 @@ public class JPanelAjouterPersonnel extends JPanel {
 	public JDialog Parent;
 
 	public JTextField TextInputNom;
+	
 	public JPasswordField TextInputMdp;
+	
+	public JComboBox<String> ComboBoxRole;
 
 	public JButton btnValider;
 
@@ -27,6 +32,8 @@ public class JPanelAjouterPersonnel extends JPanel {
 		Parent = parent;
 
 		initializeComponents(parent);
+		
+		initializeListener(parent);
 	}
 
 	private void initializeComponents(JDialog parent) throws BLLException {
@@ -40,6 +47,9 @@ public class JPanelAjouterPersonnel extends JPanel {
 		
 		JLabel textLabelMdp = new JLabel("Mot de passe");
 		TextInputMdp = new JPasswordField(15);
+
+		String[] couleurStrings = { "Secrétaire", "Vétérinaire", "Administrateur" };
+		ComboBoxRole = new JComboBox<String>(couleurStrings);
 		
 		btnValider = new JButton("Enregistrer");
 		
@@ -60,9 +70,19 @@ public class JPanelAjouterPersonnel extends JPanel {
 		this.add(TextInputMdp, gbc);
 		
 		gbc.gridx = 1;
-		gbc.gridy = 2;
+		gbc.gridy = 3;
 		this.add(btnValider, gbc);
 
+	}
+
+	private void initializeListener(JDialog parent) {
+		btnValider.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Personnel cl = new Personnel(TextInputNom.getText(), String.valueOf(TextInputMdp.getPassword()));
+			}
+		});
 	}
 
 }

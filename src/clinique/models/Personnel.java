@@ -71,4 +71,12 @@ public class Personnel {
 		setRole(role);
 		setArchive(archive);
 	}
+
+	public Personnel(String nom, String mdp, String role,
+			boolean archive) throws Exception {
+		setNom(nom);
+		setMdp(mdp);
+		setRole(role);
+		setArchive(archive);
+	}
 }

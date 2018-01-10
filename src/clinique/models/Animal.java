@@ -93,32 +93,31 @@ public class Animal {
 		this.maitre = maitre;
 	}
 	
-	public Animal(int code, String nom, String race, String sexe,
+	public Animal(String nom, String race, String sexe,
 			String couleur, String espece, String tatouage, String antecedent,
-			boolean archive) throws Exception {
-		setNom(nom);
-		setRace(race);
-		setCode(code);
+			boolean archive, Client maitre) throws Exception {
 		setSexe(sexe);
 		setCouleur(couleur);
 		setEspece(espece);
 		setTatouage(tatouage);
 		setAntecedent(antecedent);
 		setArchive(archive);
+		setMaitre(maitre);
 	}
+	
 	public Animal(int code, String nom, String race, String sexe,
 			String couleur, String espece, String tatouage, String antecedent,
 			boolean archive, Client maitre) throws Exception {
+		setCode(code);
 		setNom(nom);
 		setRace(race);
-		setCode(code);
 		setSexe(sexe);
 		setCouleur(couleur);
 		setEspece(espece);
 		setTatouage(tatouage);
 		setAntecedent(antecedent);
 		setArchive(archive);
-		this.maitre = maitre;
+		setMaitre(maitre);
 	}
 	
 }
