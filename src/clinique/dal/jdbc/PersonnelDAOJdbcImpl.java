@@ -130,13 +130,13 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 	
 	
 	@Override
-	public void updatePwd (String CodePers, String pwd) throws DALException {
+	public void updatePwd (int CodePers, String pwd) throws DALException {
 		try (Connection cnx = JdbcTools.getConnection();
 				CallableStatement rqt = cnx.prepareCall(sqlUpdatePwd);){
 			
 			cnx.setAutoCommit(false);
 			rqt.setString(1, pwd);
-			rqt.setString(2, CodePers);
+			rqt.setInt(2, CodePers);
 			
 			int nbRows = rqt.executeUpdate();
 			

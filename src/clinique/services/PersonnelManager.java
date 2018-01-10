@@ -19,7 +19,11 @@ public class PersonnelManager {
 	{
 		daoPerso = DAOFactory.getPersonnelDAO();
 		
-		persoListe = daoPerso.selectAll();
+		try {
+			persoListe = daoPerso.selectAll();
+		} catch (DALException e) {
+			throw new BLLException("[Personnel manager] instanciating failed - ", e);
+		}
 	}
 	
 	public static synchronized PersonnelManager getInstance() throws BLLException
@@ -36,24 +40,49 @@ public class PersonnelManager {
 		return persoListe;
 	}
 	
-	public List<Personnel> selectByNom(String nom) throws DALException
+	public List<Personnel> rechercherParNom(String nom) throws BLLException
 	{
-		return daoPerso.selectByNom(nom);
+		try {
+			return daoPerso.selectByNom(nom);
+		} catch (DALException e) {
+			throw new BLLException("[Personnel manager] instanciating failed - ", e);
+		}
 	}
 	
-	public void updatePwd(String codeEmp, String pwd) throws DALException
+	public List<Personnel> rechercherTousLesEmployes() throws BLLException
 	{
-		daoPerso.updatePwd(codeEmp, pwd);
+		try {
+			return daoPerso.selectAll();
+		} catch (DALException e) {
+			throw new BLLException("[Personnel manager] rechercher tous les employes failed - ", e);
+		}
 	}
 	
-	public void addEmp(Personnel perso) throws DALException {
-		daoPerso.insert(perso);
+	public void ChangerMotDePasse(int codeEmp, String pwd) throws BLLException
+	{
+		try {
+			daoPerso.updatePwd(codeEmp, pwd);
+		} catch (DALException e) {
+			throw new BLLException("[Personnel manager] changer mot de passe failed - ", e);
+		}
+	}
+	
+	public void ajouterEmploye(Personnel perso) throws BLLException {
+		try {
+			daoPerso.insert(perso);
+		} catch (DALException e) {
+			throw new BLLException("[Personnel manager] ajouter employe failed - ", e);
+		}
 		//this.setChanged();
 		//this.notifyObservers();
 	}
 	
-	public void deleteEmp(int code) throws DALException {
-		daoPerso.delete(code);
+	public void supprimerEmploye(int code) throws BLLException {
+		try {
+			daoPerso.delete(code);
+		} catch (DALException e) {
+			throw new BLLException("[Personnel manager] supprimer employe failed - ", e);
+		}
 		//this.setChanged();
 		//this.notifyObservers();
 	}

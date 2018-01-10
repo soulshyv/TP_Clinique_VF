@@ -14,6 +14,6 @@ public interface PersonnelDAO {
 
 	public abstract void insert(Personnel perso) throws DALException;
 
-	public abstract void updatePwd(String CodePers, String pwd) throws DALException;
+	public abstract void updatePwd(int codePers, String pwd) throws DALException;
 
 }
