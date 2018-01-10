@@ -1,4 +1,4 @@
-package clinique.ihm;
+package clinique.ihm.connexion;
 
 import javax.swing.JFrame;
 

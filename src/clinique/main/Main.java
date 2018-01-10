@@ -2,7 +2,7 @@ package clinique.main;
 
 import javax.swing.SwingUtilities;
 
-import clinique.ihm.FenetreConnexion;
+import clinique.ihm.connexion.FenetreConnexion;
 
 public class Main {
 
