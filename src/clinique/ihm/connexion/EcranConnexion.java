@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 import clinique.dal.jdbc.JdbcTools;
 
 @SuppressWarnings("serial")
-public class FenetreConnexion  extends JFrame {
-	public FenetreConnexion() {
+public class EcranConnexion  extends JFrame {
+	public EcranConnexion() {
 		initializeComponents();
 	}
 

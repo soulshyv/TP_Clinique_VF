@@ -4,14 +4,12 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import clinique.dal.AnimalDAO;
 import clinique.dal.DALException;
 import clinique.models.Animal;
-import clinique.services.BLLException;
 import clinique.services.ClientManager;
 
 public class AnimalDAOJdbcImpl implements AnimalDAO {

@@ -1,5 +1,6 @@
 package clinique.dal;
 
+@SuppressWarnings("serial")
 public class DALException extends Exception {
 	public DALException() {
 		super();

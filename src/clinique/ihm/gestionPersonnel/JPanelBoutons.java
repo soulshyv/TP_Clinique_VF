@@ -8,7 +8,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import clinique.ihm.gestionPersonnel.ajouterPersonnel.EcranAjouterPersonnel;
+import clinique.services.BLLException;
 
 @SuppressWarnings("serial")
 public class JPanelBoutons extends JPanel {
@@ -50,7 +54,12 @@ public class JPanelBoutons extends JPanel {
 					
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					EcranAjouterPersonnel ecrAjoutPers = new EcranAjouterPersonnel();
+					ecrAjoutPers.setVisible(true);
+				} catch (BLLException ex) {
+					JOptionPane.showMessageDialog(Parent, ex.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 	}

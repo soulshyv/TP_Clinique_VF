@@ -1,9 +1,6 @@
 package clinique.ihm.gestionPersonnel.ajouterPersonnel;
 
 import javax.swing.JDialog;
-import javax.swing.JFrame;
-
-import clinique.ihm.gestionPersonnel.JPanelGestionPersonnel;
 import clinique.services.BLLException;
 
 @SuppressWarnings("serial")
@@ -16,7 +13,7 @@ public class EcranAjouterPersonnel extends JDialog {
 		JPanelAjouterPersonnel mainPanel = new JPanelAjouterPersonnel(this);
     	
 		this.add(mainPanel);
-		this.setSize(500, 700);
+		this.setSize(380, 220);
 		this.setTitle("Ajouter un employé");
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
