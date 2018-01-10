@@ -19,7 +19,12 @@ public class PersonnelManager {
 	{
 		daoPerso = DAOFactory.getPersonnelDAO();
 		
-		persoListe = daoPerso.selectAll();
+		try {
+			persoListe = daoPerso.selectAll();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static synchronized PersonnelManager getInstance() throws BLLException
