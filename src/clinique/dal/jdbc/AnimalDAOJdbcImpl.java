@@ -83,7 +83,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 		try (Connection cnx = JdbcTools.getConnection();
 				PreparedStatement rqt = cnx.prepareStatement(sqlSelectAll);) {
 
-			ResultSet rs = rqt.executeQuery(sqlSelectAll);
+			ResultSet rs = rqt.executeQuery();
 			Animal animal = null;
 
 			ClientManager clMngr = ClientManager.getInstance();

@@ -25,6 +25,11 @@ public class ClientManager {
 		}
 	}
 	
+	public List<Client> getClient()
+	{
+		return clients;
+	}
+	
 	public static ClientManager getInstance() throws BLLException
 	{
 		if(instance == null)

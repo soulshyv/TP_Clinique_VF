@@ -96,7 +96,7 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 	public List<Client> selectByNom(String nom) throws DALException {
 		try (Connection conn = JdbcTools.getConnection()) {
 
-			PreparedStatement rqt = conn.prepareStatement(sqlSelectByCode);
+			PreparedStatement rqt = conn.prepareStatement(sqlSelectNom);
 			rqt.setString(1, nom);
 
 			ResultSet rs = rqt.executeQuery();
@@ -122,19 +122,24 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 	public List<Client> selectAll() throws DALException {
 		try (Connection conn = JdbcTools.getConnection()) {
 
-			Statement rqt = conn.createStatement();
+			PreparedStatement rqt = conn.prepareStatement(sqlSelectAll);
 
-			ResultSet rs = rqt.executeQuery(sqlSelectByCode);
+			ResultSet rs = rqt.executeQuery();
 
 			List<Client> clients = new ArrayList<Client>();
 			while (rs.next()) {
-					clients.add(new Client(rs.getInt("CodeClient"), rs
-							.getString("NomClient"), rs.getString("PrenomClient"),
-							rs.getString("Adresse1"), rs.getString("Adresse2"), rs
-									.getString("CodePostal"),
-							rs.getString("Ville"), rs.getString("NumTel"), rs
-									.getString("Assurance"), rs.getString("Email"),
-							rs.getString("Remarque"), rs.getBoolean("Archive")));
+					clients.add(new Client(rs.getInt("CodeClient"), 
+							rs.getString("NomClient"), 
+							rs.getString("PrenomClient"),
+							rs.getString("Adresse1"), 
+							rs.getString("Adresse2"), 
+							rs.getString("CodePostal"),
+							rs.getString("Ville"), 
+							rs.getString("NumTel"), 
+							rs.getString("Assurance"), 
+							rs.getString("Email"),
+							rs.getString("Remarque"), 
+							rs.getBoolean("Archive")));
 			}
 
 			return clients;

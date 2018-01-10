@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 import clinique.dal.jdbc.JdbcTools;
 
-public class FenetreConnexion  extends JFrame {
+public class FenetreConnexion extends JFrame {
 	public FenetreConnexion() {
 		JPanelConnexion connexionPanel = new JPanelConnexion(this);
 		

@@ -1,13 +1,15 @@
 package clinique.services;
 
 import java.util.List;
+import java.util.Observable;
 
 import clinique.dal.AnimalDAO;
 import clinique.dal.DALException;
 import clinique.dal.DAOFactory;
 import clinique.models.Animal;
+import clinique.models.Personnel;
 
-public class AnimalManager {
+public class AnimalManager extends Observable {
 	
 	private List<Animal> animalListe;
 	

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import clinique.dal.DALException;
 import clinique.dal.DAOFactory;
 import clinique.dal.PersonnelDAO;
+import clinique.ihm.ecranClient.FenetreClient;
 import clinique.ihm.gestionPersonnel.EcranGestionPersonnel;
 import clinique.models.Personnel;
 
@@ -24,7 +25,7 @@ public class PersonnelManager {
 		
 		try {
 			persoListe = daoPerso.selectAll();
-		} catch (Exception e) {
+		} catch (DALException e) {
 			throw new BLLException("[Personnel manager] instanciating failed - ", e);
 		}
 	}
@@ -105,7 +106,7 @@ public class PersonnelManager {
 						break;
 						
 					case "vet":
-						break;
+						return new FenetreClient();
 						
 					case "adm":
 						return new EcranGestionPersonnel();
