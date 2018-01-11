@@ -1,13 +1,14 @@
 package clinique.services;
 
 import java.util.List;
+import java.util.Observable;
 
 import clinique.dal.ClientDAO;
 import clinique.dal.DALException;
 import clinique.dal.DAOFactory;
 import clinique.models.Client;
 
-public class ClientManager {
+public class ClientManager extends Observable {
 	private List<Client> clientListe;
 	
 	private static ClientManager instance = null;
@@ -104,5 +105,22 @@ public class ClientManager {
 		} catch (DALException e) {
 			throw new BLLException("[ClientManager] rechercher tous les clients failed - " + e.getMessage());
 		}
+	}
+
+	public void ArchiverClient(String nom) throws BLLException {
+		if(nom.trim() == "")
+			throw new BLLException("[Client Manager] rechercher client par nom failed - name incorrect");
+		
+		try {
+			List<Client> c = daoClient.selectByNom(nom);
+			if (c.size() == 1)
+			{
+				int code = c.get(0).getCode();
+				daoClient.ArchiveByCode(code);
+			}
+		} catch (DALException e) {
+			throw new BLLException("[ClientManager] rechercher client par nom failed - " + e.getMessage());
+		}
+		
 	}
 }

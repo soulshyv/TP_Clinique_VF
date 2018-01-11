@@ -47,8 +47,8 @@ public class AnimalManager extends Observable {
 		} catch (DALException e) {
 			throw new BLLException("[Animal manager] instanciating failed - " + e.getMessage());
 		}
-		//this.setChanged();
-		//this.notifyObservers();
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public void supprimerAnimal(int code) throws BLLException {
@@ -67,8 +67,8 @@ public class AnimalManager extends Observable {
 		} catch (DALException e) {
 			throw new BLLException("[Animal manager] supprimer animal failed - " + e.getMessage());
 		}
-		//this.setChanged();
-		//this.notifyObservers();
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public void changerInfosAnimal(Animal animal) throws BLLException {
