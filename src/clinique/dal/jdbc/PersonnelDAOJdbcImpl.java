@@ -12,7 +12,7 @@ import clinique.dal.PersonnelDAO;
 import clinique.models.Personnel;
 
 public class PersonnelDAOJdbcImpl implements PersonnelDAO {
-	private final String sqlInsert = "{call ajout_personnel (?,?,?,?,?,?,?,?)}";
+	private final String sqlInsert = "{call ajout_personnel (?,?,?,?)}";
 	private final String sqlDelete = "DELETE FROM Personnels WHERE CodePers = ?"; 
 	private final String sqlSelectAll = "SELECT CodePers, Nom, MotPasse, Role, Archive FROM Personnels";
 	private final String sqlSelectByNom = "SELECT CodePers, Nom, MotPasse, Role, Archive FROM Personnels WHERE Nom = ?";
@@ -105,11 +105,10 @@ public class PersonnelDAOJdbcImpl implements PersonnelDAO {
 				CallableStatement rqt = cnx.prepareCall(sqlInsert);){
 			
 			cnx.setAutoCommit(false);
-			rqt.setInt(1, perso.getCodeEmp());
-			rqt.setString(2, perso.getNom());
-			rqt.setString(3, perso.getMdp());
+			rqt.setString(1, perso.getNom());
+			rqt.setString(2, perso.getMdp());
+			rqt.setBoolean(3, perso.isArchive());
 			rqt.setString(4, perso.getRole());
-			rqt.setString(5, perso.getRole());
 			
 			int nbRows = rqt.executeUpdate();
 			

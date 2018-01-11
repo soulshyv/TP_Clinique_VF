@@ -1,4 +1,4 @@
-package clinique.main;
+package clinique;
 
 import javax.swing.SwingUtilities;
 

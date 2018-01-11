@@ -65,6 +65,12 @@ public class PersonnelManager {
 	{
 		try {
 			daoPerso.updatePwd(codeEmp, pwd);
+			for(Personnel p : persoListe)
+				if(p.getCodeEmp() == codeEmp)
+				{
+					p.setMdp(pwd);
+					break;
+				}
 		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] changer mot de passe failed - " + e.getMessage());
 		}
@@ -73,6 +79,7 @@ public class PersonnelManager {
 	public void ajouterEmploye(Personnel perso) throws BLLException {
 		try {
 			daoPerso.insert(perso);
+			persoListe.add(perso);
 		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] ajouter employe failed - " + e.getMessage());
 		}
@@ -83,6 +90,16 @@ public class PersonnelManager {
 	public void supprimerEmploye(int code) throws BLLException {
 		try {
 			daoPerso.delete(code);
+			int i = 0;
+			for(Personnel p : persoListe)
+			{
+				if(p.getCodeEmp() == code)
+				{
+					persoListe.remove(i);
+					break;
+				}
+				i++;
+			}
 		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] supprimer employe failed - " + e.getMessage());
 		}
@@ -90,7 +107,7 @@ public class PersonnelManager {
 		//this.notifyObservers();
 	}
 	
-	public JFrame ConnexionEmploye(String nom, String mdp) throws BLLException {
+	public String ConnexionEmploye(String nom, String mdp) throws BLLException {
 		List<Personnel> pers = rechercherParNom(nom);
 		if(pers.size() < 1)
 			throw new BLLException("Nom invalide");
@@ -99,20 +116,7 @@ public class PersonnelManager {
 		{
 			if(p.getMdp().trim().equals(mdp.trim()))
 			{
-				switch(p.getRole())
-				{
-					case "sec":
-						return new FenetreClient();
-						
-					case "vet":
-						break;
-						
-					case "adm":
-						return new EcranGestionPersonnel();
-						
-					default:
-						throw new BLLException("Vous n'avez pas les permissions requises");
-				}
+				return p.getRole();
 			}
 		}
 		

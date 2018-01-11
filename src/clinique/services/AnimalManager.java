@@ -43,6 +43,7 @@ public class AnimalManager extends Observable {
 	public void ajouterAnimal(Animal newAnimal) throws BLLException {
 		try {
 			daoAnimal.insert(newAnimal);
+			animalListe.add(newAnimal);
 		} catch (DALException e) {
 			throw new BLLException("[Animal manager] instanciating failed - " + e.getMessage());
 		}
@@ -50,9 +51,19 @@ public class AnimalManager extends Observable {
 		//this.notifyObservers();
 	}
 	
-	public void supprimerAnimal(int index) throws BLLException {
+	public void supprimerAnimal(int code) throws BLLException {
 		try {
-			daoAnimal.delete(index);
+			daoAnimal.delete(code);
+			int i =0;
+			for(Animal a : animalListe)
+			{
+				if(a.getCode() == code)
+				{
+					animalListe.remove(i);
+					break;
+				}
+				i++;
+			}
 		} catch (DALException e) {
 			throw new BLLException("[Animal manager] supprimer animal failed - " + e.getMessage());
 		}
@@ -63,6 +74,16 @@ public class AnimalManager extends Observable {
 	public void changerInfosAnimal(Animal animal) throws BLLException {
 		try {
 			daoAnimal.update(animal);
+			int i = 0;
+			for(Animal a : animalListe)
+			{
+				if(a.getCode() == animal.getCode())
+				{
+					animalListe.set(i, animal);
+					break;
+				}
+				i++;
+			}
 		} catch (DALException e) {
 			throw new BLLException("[Animal manager] changer infos animal failed - " + e.getMessage());
 		}

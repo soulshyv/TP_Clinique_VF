@@ -10,33 +10,36 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import clinique.models.Personnel;
 import clinique.services.BLLException;
+import clinique.services.PersonnelManager;
 
 @SuppressWarnings("serial")
 public class JPanelAjouterPersonnel extends JPanel {
-	public JDialog Parent;
+	private JDialog Parent;
 
-	public JTextField TextInputNom;
+	private JTextField TextInputNom;
 	
-	public JPasswordField TextInputMdp;
+	private JPasswordField TextInputMdp;
 	
-	public JComboBox<String> ComboBoxRole;
+	private JComboBox<String> ComboBoxInputRole;
 
-	public JButton btnValider;
+	private JButton btnValider;
 
 	public JPanelAjouterPersonnel(JDialog parent) throws BLLException {
 		Parent = parent;
 
-		initializeComponents(parent);
+		initializeComponents();
 		
-		initializeListener(parent);
+		initializeListener();
 	}
 
-	private void initializeComponents(JDialog parent) throws BLLException {
+	private void initializeComponents() throws BLLException {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(5, 5, 5, 5);
 		
@@ -48,8 +51,9 @@ public class JPanelAjouterPersonnel extends JPanel {
 		JLabel textLabelMdp = new JLabel("Mot de passe");
 		TextInputMdp = new JPasswordField(15);
 
+		JLabel textLabelRole = new JLabel("Rôle");
 		String[] couleurStrings = { "Secrétaire", "Vétérinaire", "Administrateur" };
-		ComboBoxRole = new JComboBox<String>(couleurStrings);
+		ComboBoxInputRole = new JComboBox<String>(couleurStrings);
 		
 		btnValider = new JButton("Enregistrer");
 		
@@ -69,18 +73,53 @@ public class JPanelAjouterPersonnel extends JPanel {
 		gbc.gridy = 1;
 		this.add(TextInputMdp, gbc);
 		
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		this.add(textLabelRole, gbc);
+		
+		gbc.gridx = 1;
+		gbc.gridy = 2;
+		this.add(ComboBoxInputRole, gbc);
+		
 		gbc.gridx = 1;
 		gbc.gridy = 3;
 		this.add(btnValider, gbc);
 
 	}
 
-	private void initializeListener(JDialog parent) {
+	private void initializeListener() {
 		btnValider.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Personnel cl = new Personnel(TextInputNom.getText(), String.valueOf(TextInputMdp.getPassword()));
+				try {
+					String role = "";
+					
+					//On récupère le rôle
+					switch((String)ComboBoxInputRole.getItemAt(ComboBoxInputRole.getSelectedIndex()))
+					{
+						case "Secrétaire":
+							role = "sec";
+							break;
+							
+						case "Vétérinaire":
+							role = "vet";
+							break;
+							
+						case "Administrateur":
+							role = "adm";
+							break;
+					}
+					Personnel pers = new Personnel(TextInputNom.getText(), String.valueOf(TextInputMdp.getPassword()), role, false);
+					PersonnelManager PersMng = PersonnelManager.getInstance();
+					
+					PersMng.ajouterEmploye(pers);
+					JOptionPane.showMessageDialog(Parent, "Enregistrement réussi", "Succès", JOptionPane.INFORMATION_MESSAGE);
+					Parent.dispose();
+					
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(Parent, ex.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 	}

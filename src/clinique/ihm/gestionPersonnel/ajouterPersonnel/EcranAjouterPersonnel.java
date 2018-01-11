@@ -13,7 +13,7 @@ public class EcranAjouterPersonnel extends JDialog {
 		JPanelAjouterPersonnel mainPanel = new JPanelAjouterPersonnel(this);
     	
 		this.add(mainPanel);
-		this.setSize(380, 220);
+		this.setSize(420, 220);
 		this.setTitle("Ajouter un employé");
 		this.setLocationRelativeTo(null);
 		this.setModal(true);
