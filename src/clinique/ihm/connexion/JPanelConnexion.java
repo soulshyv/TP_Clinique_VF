@@ -1,6 +1,5 @@
 package clinique.ihm.connexion;
 
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -17,6 +16,7 @@ import javax.swing.JTextField;
 
 import clinique.ihm.ecranClient.FenetreClient;
 import clinique.ihm.gestionPersonnel.EcranGestionPersonnel;
+import clinique.ihm.rdv.EcranRdv;
 import clinique.services.BLLException;
 import clinique.services.PersonnelManager;
 
@@ -48,10 +48,10 @@ public class JPanelConnexion extends JPanel {
     	this.setLayout(new GridBagLayout());
     	
     	JLabel textLabelConnexion = new JLabel("Nom");
-    	this.TextInputConnexion = new JTextField("AIMONE Anne");
+    	this.TextInputConnexion = new JTextField(15);
     	
     	JLabel textLabelMotDePasse = new JLabel("Mot de passe");
-    	this.TextInputMotDePasse = new JPasswordField("FLEUR");
+    	this.TextInputMotDePasse = new JPasswordField(15);
     	
     	this.JButtonValider = new JButton("Valider");
     	
@@ -94,11 +94,12 @@ public class JPanelConnexion extends JPanel {
 					switch(role)
 					{
 						case "sec":
-							ecr = new FenetreClient();
+							ecr = new FenetreClient(FrameParent);
 							ecr.setVisible(true);
 							break;
 							
 						case "vet":
+							ecr = new EcranRdv(FrameParent);
 							break;
 							
 						case "adm":

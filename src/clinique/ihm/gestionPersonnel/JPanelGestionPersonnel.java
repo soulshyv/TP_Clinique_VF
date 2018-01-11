@@ -5,12 +5,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import clinique.services.BLLException;
+import clinique.services.PersonnelManager;
 
 @SuppressWarnings("serial")
 public class JPanelGestionPersonnel extends JPanel {
 	private EcranGestionPersonnel FrameParent;
 	private JPanelBoutons BoutonsPanel;
-	private JPanelListeEmployes ListeEmployesPanel;
+	private JPaneTabEmployes ListeEmployesPanel;
 	
 	public EcranGestionPersonnel getFrameParent() {
 		return FrameParent;
@@ -20,7 +21,7 @@ public class JPanelGestionPersonnel extends JPanel {
 		return BoutonsPanel;
 	}
 
-	public JPanelListeEmployes getListeEmployesPanel() {
+	public JPaneTabEmployes getListeEmployesPanel() {
 		return ListeEmployesPanel;
 	}
 
@@ -34,7 +35,9 @@ public class JPanelGestionPersonnel extends JPanel {
 	private void initializeComponents() throws BLLException {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		BoutonsPanel = new JPanelBoutons(this);
-		ListeEmployesPanel = new JPanelListeEmployes(this);
+		ListeEmployesPanel = new JPaneTabEmployes(this);
+		PersonnelManager persMng = PersonnelManager.getInstance();
+		persMng.addObserver(ListeEmployesPanel);
 		this.add(BoutonsPanel);
 		this.add(ListeEmployesPanel);
 	}
