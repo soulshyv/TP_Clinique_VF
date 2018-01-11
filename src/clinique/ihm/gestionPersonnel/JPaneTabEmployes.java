@@ -10,13 +10,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import clinique.models.Personnel;
 import clinique.services.BLLException;
 import clinique.services.PersonnelManager;
 
 @SuppressWarnings("serial")
-public class JPanelListeEmployes extends JPanel implements Observer {
+public class JPaneTabEmployes extends JPanel implements Observer {
 	private JPanelGestionPersonnel PanelParent;
 	private JTable ListScroller;
 	private JScrollPane ScrollPane;
@@ -29,7 +30,7 @@ public class JPanelListeEmployes extends JPanel implements Observer {
 		return ListScroller;
 	}
 
-	public JPanelListeEmployes(JPanelGestionPersonnel parent) {
+	public JPaneTabEmployes(JPanelGestionPersonnel parent) {
 		PanelParent = parent;
 		
 		initializeComponents();
@@ -63,13 +64,34 @@ public class JPanelListeEmployes extends JPanel implements Observer {
 		}
 	}
 	
-	private void updateModel()
+	private void updateTable(List<Personnel> pers)
 	{
+		String[] columnNames = {"Nom ",
+                "Role",
+                "Mot de passe"};
+		DefaultTableModel model = new DefaultTableModel(columnNames, 0);
 		
+		for(Personnel p : pers)
+		{
+			model.addRow(new Object[] {
+					p.getNom(),
+					p.getRole(),
+					"********"
+			});
+		}
+		ListScroller.setModel(model);
 	}
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		updateModel();
+		this.setLayout(new GridBagLayout());
+		try {
+			PersonnelManager persMng = PersonnelManager.getInstance();
+			List<Personnel> pers = persMng.getPersonnel();
+			
+			updateTable(pers);
+		} catch (BLLException e) {
+			JOptionPane.showMessageDialog(PanelParent, e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

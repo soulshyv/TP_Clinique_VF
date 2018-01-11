@@ -1,6 +1,7 @@
 package clinique.services;
 
 import java.util.List;
+import java.util.Observable;
 
 import javax.swing.JFrame;
 
@@ -10,7 +11,7 @@ import clinique.ihm.ecranClient.FenetreClient;
 import clinique.ihm.gestionPersonnel.EcranGestionPersonnel;
 import clinique.models.Personnel;
 
-public class PersonnelManager {
+public class PersonnelManager extends Observable{
 	
 	private List<Personnel> persoListe;
 	
@@ -71,6 +72,8 @@ public class PersonnelManager {
 					p.setMdp(pwd);
 					break;
 				}
+			this.setChanged();
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] changer mot de passe failed - " + e.getMessage());
 		}
@@ -80,11 +83,11 @@ public class PersonnelManager {
 		try {
 			daoPerso.insert(perso);
 			persoListe.add(perso);
+			this.setChanged();
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] ajouter employe failed - " + e.getMessage());
 		}
-		//this.setChanged();
-		//this.notifyObservers();
 	}
 	
 	public void supprimerEmploye(int code) throws BLLException {
@@ -100,11 +103,11 @@ public class PersonnelManager {
 				}
 				i++;
 			}
+			this.setChanged();
+			this.notifyObservers();
 		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] supprimer employe failed - " + e.getMessage());
 		}
-		//this.setChanged();
-		//this.notifyObservers();
 	}
 	
 	public String ConnexionEmploye(String nom, String mdp) throws BLLException {

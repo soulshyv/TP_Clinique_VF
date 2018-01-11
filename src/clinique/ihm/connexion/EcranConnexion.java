@@ -26,7 +26,6 @@ public class EcranConnexion  extends JFrame {
 		this.setSize(380, 220);
 		this.setTitle("Connexion");
 		this.setLocationRelativeTo(null);
-		this.setVisible(true);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

@@ -10,6 +10,7 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				EcranConnexion ecranPrincipal = new EcranConnexion();
+				ecranPrincipal.setVisible(true);
 			}
 		});
 	}
