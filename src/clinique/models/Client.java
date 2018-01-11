@@ -146,4 +146,18 @@ public class Client {
 		setRemarque(remarque);
 		setArchive(archive);
 	}
+
+	public Client(String nom, String prenom, String adresse1, String adresse2,
+			String cp, String ville, String numTel, String assurance, String email, String remarque) throws Exception {
+		setNom(nom);
+		setPrenom(prenom);
+		setAdresse1(adresse1);
+		setAdresse2(adresse2);
+		setCp(cp);
+		setVille(ville);
+		setNumTel(numTel);
+		setAssurance(assurance);
+		setEmail(email);
+		setRemarque(remarque);
+	}
 }

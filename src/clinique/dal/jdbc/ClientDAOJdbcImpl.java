@@ -34,7 +34,8 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 			rqt.setString(6, client.getVille());
 			rqt.setString(7, client.getNumTel());
 			rqt.setString(8, client.getAssurance());
-			rqt.setBoolean(9, client.isArchive());
+			rqt.setString(9, client.getRemarque());
+			rqt.setBoolean(10, client.isArchive());
 
 			int nbRows = rqt.executeUpdate();
 			if (nbRows != 1) {
@@ -79,11 +80,16 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 			while (rs.next()) {
 				return new Client(rs.getInt("CodeClient"),
 						rs.getString("NomClient"),
-						rs.getString("PrenomClient"), rs.getString("Adresse1"),
-						rs.getString("Adresse2"), rs.getString("CodePostal"),
-						rs.getString("Ville"), rs.getString("NumTel"),
-						rs.getString("Assurance"), rs.getString("Email"),
-						rs.getString("Remarque"), rs.getBoolean("Archive"));
+						rs.getString("PrenomClient"), 
+						rs.getString("Adresse1"),
+						rs.getString("Adresse2"), 
+						rs.getString("CodePostal"),
+						rs.getString("Ville"), 
+						rs.getString("NumTel"),
+						rs.getString("Assurance"), 
+						rs.getString("Email"),
+						rs.getString("Remarque"), 
+						rs.getBoolean("Archive"));
 			}
 		} catch (Exception e) {
 			throw new DALException("[Client] select by code failde - " + e.getMessage());
@@ -102,13 +108,18 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 
 			List<Client> clients = new ArrayList<Client>();
 			while (rs.next()) {
-					clients.add(new Client(rs.getInt("CodeClient"), rs
-							.getString("NomClient"), rs.getString("PrenomClient"),
-							rs.getString("Adresse1"), rs.getString("Adresse2"), rs
-									.getString("CodePostal"),
-							rs.getString("Ville"), rs.getString("NumTel"), rs
-									.getString("Assurance"), rs.getString("Email"),
-							rs.getString("Remarque"), rs.getBoolean("Archive")));
+					clients.add(new Client(rs.getInt("CodeClient"), 
+							rs.getString("NomClient"), 
+							rs.getString("PrenomClient"),
+							rs.getString("Adresse1"), 
+							rs.getString("Adresse2"), 
+							rs.getString("CodePostal"),
+							rs.getString("Ville"), 
+							rs.getString("NumTel"), 
+							rs.getString("Assurance"), 
+							rs.getString("Email"),
+							rs.getString("Remarque"), 
+							rs.getBoolean("Archive")));
 			}
 
 			return clients;

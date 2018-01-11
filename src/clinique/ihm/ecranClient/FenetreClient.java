@@ -6,10 +6,12 @@ import clinique.services.BLLException;
 
 public class FenetreClient extends JFrame {
 	
+	public JPanelMenu panelMenu;
+	
 	public FenetreClient() throws BLLException{
-		JPanelMenu panelMenu = new JPanelMenu(this);
+		panelMenu = new JPanelMenu(this);
 		this.add(panelMenu);
-		this.setSize(500, 500);
+		this.setSize(800, 600);
 		this.setTitle("Clients");
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);

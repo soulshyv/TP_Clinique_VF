@@ -44,10 +44,10 @@ public class JPanelConnexion extends JPanel {
     	this.setLayout(new GridBagLayout());
     	
     	JLabel textLabelConnexion = new JLabel("Nom");
-    	this.TextInputConnexion = new JTextField(15);
+    	this.TextInputConnexion = new JTextField("AIMONE Anne");
     	
     	JLabel textLabelMotDePasse = new JLabel("Mot de passe");
-    	this.TextInputMotDePasse = new JPasswordField(15);
+    	this.TextInputMotDePasse = new JPasswordField("FLEUR");
     	
     	this.JButtonValider = new JButton("Valider");
     	
