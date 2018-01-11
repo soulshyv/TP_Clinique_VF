@@ -8,17 +8,35 @@ import clinique.services.BLLException;
 
 @SuppressWarnings("serial")
 public class JPanelGestionPersonnel extends JPanel {
-	public JPanelGestionPersonnel(JFrame parent) throws BLLException
-	{
-		initializeComponents(parent);
+	private EcranGestionPersonnel FrameParent;
+	private JPanelBoutons BoutonsPanel;
+	private JPanelListeEmployes ListeEmployesPanel;
+	
+	public EcranGestionPersonnel getFrameParent() {
+		return FrameParent;
 	}
 
-	private void initializeComponents(JFrame parent) throws BLLException {
+	public JPanelBoutons getBoutonsPanel() {
+		return BoutonsPanel;
+	}
+
+	public JPanelListeEmployes getListeEmployesPanel() {
+		return ListeEmployesPanel;
+	}
+
+	public JPanelGestionPersonnel(EcranGestionPersonnel parent) throws BLLException
+	{
+		FrameParent = parent;
+		
+		initializeComponents();
+	}
+
+	private void initializeComponents() throws BLLException {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		JPanelBoutons boutonsPanel = new JPanelBoutons(parent);
-		JPanelListeEmployes listeEmployesPanel = new JPanelListeEmployes(parent);
-		this.add(boutonsPanel);
-		this.add(listeEmployesPanel);
+		BoutonsPanel = new JPanelBoutons(this);
+		ListeEmployesPanel = new JPanelListeEmployes(this);
+		this.add(BoutonsPanel);
+		this.add(ListeEmployesPanel);
 	}
 	
 }

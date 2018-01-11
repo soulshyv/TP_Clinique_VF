@@ -49,4 +49,9 @@ public class Rdv {
 		setDateRdv(dateRdv);
 		setCodeAnimal(codeAnimal);
 	}
+
+	public Rdv(Date dateRdv, long codeAnimal) throws Exception {
+		setDateRdv(dateRdv);
+		setCodeAnimal(codeAnimal);
+	}
 }

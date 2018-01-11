@@ -1,5 +1,6 @@
 package clinique.ihm.connexion;
 
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -14,25 +15,28 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import clinique.ihm.ecranClient.FenetreClient;
+import clinique.ihm.gestionPersonnel.EcranGestionPersonnel;
+import clinique.services.BLLException;
 import clinique.services.PersonnelManager;
 
 @SuppressWarnings("serial")
 public class JPanelConnexion extends JPanel {
-	public JFrame Parent;
+	private EcranConnexion FrameParent;
 	
-	public JTextField TextInputConnexion;
+	private JTextField TextInputConnexion;
 	
-	public JPasswordField TextInputMotDePasse;
+	private JPasswordField TextInputMotDePasse;
 	
-	public JButton JButtonValider;
+	private JButton JButtonValider;
 	
 	
-	public JPanelConnexion(JFrame parent){
-		Parent = parent;
+	public JPanelConnexion(EcranConnexion parent){
+		FrameParent = parent;
 		
 		initializeComponents();
     	
-    	initializeListener(parent);
+    	initializeListener();
 	}
 
 	private void initializeComponents() {
@@ -72,7 +76,7 @@ public class JPanelConnexion extends JPanel {
     	this.add(JButtonValider, gbc);
 	}
 
-	private void initializeListener(JFrame parent) {
+	private void initializeListener() {
 		JButtonValider.addActionListener(new ActionListener() {
 			
 			@Override
@@ -82,14 +86,35 @@ public class JPanelConnexion extends JPanel {
 						throw new Exception("Veuillez renseigner tous les champs");
 						
 					PersonnelManager PersMng = PersonnelManager.getInstance();
-					JFrame ecr = PersMng.ConnexionEmploye(TextInputConnexion.getText(), String.valueOf(TextInputMotDePasse.getPassword()));
-					if(ecr == null)
+					String role = PersMng.ConnexionEmploye(TextInputConnexion.getText(), String.valueOf(TextInputMotDePasse.getPassword()));
+					if(role == null || role.trim() == "")
 						throw new Exception("Identifiants de connexion erronés");
 					
-					parent.dispose();
-					ecr.setVisible(true);
+					JFrame ecr = null;
+					switch(role)
+					{
+						case "sec":
+							ecr = new FenetreClient();
+							ecr.setVisible(true);
+							break;
+							
+						case "vet":
+							break;
+							
+						case "adm":
+							ecr = new EcranGestionPersonnel(FrameParent);
+							ecr.setVisible(true);
+							break;
+							
+						default:
+							throw new BLLException("Vous n'avez pas les permissions requises");
+					}
+					
+					FrameParent.setVisible(false);
+					TextInputConnexion.setText("");
+					TextInputMotDePasse.setText("");
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(parent, ex.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(FrameParent, ex.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

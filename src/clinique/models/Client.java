@@ -147,8 +147,9 @@ public class Client {
 		setArchive(archive);
 	}
 
-	public Client(String nom, String prenom, String adresse1, String adresse2,
-			String cp, String ville, String numTel, String assurance, String email, String remarque) throws Exception {
+	public Client(String nom, String prenom, String adresse1,
+			String adresse2, String cp, String ville, String numTel,
+			String assurance, String email, String remarque, boolean archive) throws Exception {
 		setNom(nom);
 		setPrenom(prenom);
 		setAdresse1(adresse1);
@@ -159,5 +160,6 @@ public class Client {
 		setAssurance(assurance);
 		setEmail(email);
 		setRemarque(remarque);
+		setArchive(archive);
 	}
 }

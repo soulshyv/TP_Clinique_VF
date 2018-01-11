@@ -12,7 +12,7 @@ import clinique.models.Personnel;
 import clinique.models.Rdv;
 
 public class RdvManager {
-	private List<Rdv> rdvs;
+	private List<Rdv> rdvListe;
 	
 	private static RdvManager instance = null;
 	
@@ -23,7 +23,7 @@ public class RdvManager {
 		daoRdv = DAOFactory.getRdvDAO();
 		
 		try {
-			rdvs = daoRdv.selectAll();
+			rdvListe = daoRdv.selectAll();
 		} catch (DALException e) {
 			throw new BLLException("[Rdv manager] instanciating failed - " + e.getMessage());
 		}
@@ -54,6 +54,16 @@ public class RdvManager {
 		
 		try {
 			daoRdv.deleteByCodeVeto(code);
+			int i = 0;
+			for(Rdv r : rdvListe)
+			{
+				if(r.getCodeVeto() == code)
+				{
+					rdvListe.remove(i);
+					break;
+				}
+				i++;
+			}
 		} catch (DALException e) {
 			throw new BLLException("[Rdv manager] supprimer rdv par code veto failed - " + e.getMessage());
 		}
@@ -66,6 +76,16 @@ public class RdvManager {
 		
 		try {
 			daoRdv.deleteByDate(date);
+			int i =0;
+			for(Rdv r : rdvListe)
+			{
+				if(r.getDateRdv() == date)
+				{
+					rdvListe.remove(i);
+					break;
+				}
+				i++;
+			}
 		} catch (DALException e) {
 			throw new BLLException("[Rdv manager] supprimer rdv par code veto failed - " + e.getMessage());
 		}
@@ -77,7 +97,17 @@ public class RdvManager {
 			throw new BLLException("[Rdv manager] supprimer rdv par code animal failed - code incorrect");
 		
 		try {
-			daoRdv.deleteByCodeVeto(code);
+			daoRdv.deleteByCodeAnimal(code);
+			int i =0;
+			for(Rdv r : rdvListe)
+			{
+				if(r.getCodeAnimal() == code)
+				{
+					rdvListe.remove(i);
+					break;
+				}
+				i++;
+			}
 		} catch (DALException e) {
 			throw new BLLException("[Rdv manager] supprimer rdv par code animal failed - " + e.getMessage());
 		}

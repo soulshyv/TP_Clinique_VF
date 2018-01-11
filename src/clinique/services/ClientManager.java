@@ -8,7 +8,7 @@ import clinique.dal.DAOFactory;
 import clinique.models.Client;
 
 public class ClientManager {
-	private List<Client> clients;
+	private List<Client> clientListe;
 	
 	private static ClientManager instance = null;
 	
@@ -19,7 +19,7 @@ public class ClientManager {
 		daoClient = DAOFactory.getClientDAO();
 		
 		try {
-			clients = daoClient.selectAll();
+			clientListe = daoClient.selectAll();
 		} catch (Exception e) {
 			throw new BLLException("[Client manager] instanciating failed - " + e.getMessage());
 		}
@@ -27,7 +27,7 @@ public class ClientManager {
 	
 	public List<Client> getClient()
 	{
-		return clients;
+		return clientListe;
 	}
 	
 	public static ClientManager getInstance() throws BLLException
@@ -45,6 +45,7 @@ public class ClientManager {
 		
 		try {
 			daoClient.insert(client);
+			clientListe.add(client);
 		} catch (DALException e) {
 			throw new BLLException("[ClientManager] ajouter client failed - " + e.getMessage());
 		}
@@ -57,6 +58,16 @@ public class ClientManager {
 		
 		try {
 			daoClient.deleteByCode(code);
+			int i =0;
+			for(Client c : clientListe)
+			{
+				if(c .getCode() == code)
+				{
+					clientListe.remove(i);
+					break;
+				}
+				i++;
+			}
 		} catch (DALException e) {
 			throw new BLLException("[ClientManager] supprimer client par code failed - " + e.getMessage());
 		}
