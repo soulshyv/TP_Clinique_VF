@@ -16,7 +16,7 @@ import clinique.models.Client;
 import clinique.models.Personnel;
 import clinique.models.Rdv;
 
-public class RdvDAODjbcImpl implements RdvDAO {
+public class RdvDAOJdbcImpl implements RdvDAO {
 
 	private final String sqlInsert = "{CALL ajout_agenda(?,?,?,?,?)}";
 	private final String sqlDeleteByCodeVeto = "DELETE FROM Agendas WHERE CodeClient=?";

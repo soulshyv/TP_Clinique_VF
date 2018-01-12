@@ -3,15 +3,15 @@ package clinique.models;
 import java.util.Date;
 
 public class Rdv {
-	private long codeVeto;
+	private int codeVeto;
 	private Date dateRdv;
-	private long codeAnimal;
+	private int codeAnimal;
 
-	public long getCodeVeto() {
+	public int getCodeVeto() {
 		return codeVeto;
 	}
 
-	public void setCodeVeto(long codeVeto) throws Exception {
+	public void setCodeVeto(int codeVeto) throws Exception {
 		if (codeVeto == 0)
 		{
 			throw new Exception("Nom invalide");
@@ -32,11 +32,11 @@ public class Rdv {
 		this.dateRdv = dateRdv;
 	}
 
-	public long getCodeAnimal() {
+	public int getCodeAnimal() {
 		return codeAnimal;
 	}
 
-	public void setCodeAnimal(long codeAnimal) throws Exception {
+	public void setCodeAnimal(int codeAnimal) throws Exception {
 		if (codeAnimal == 0)
 		{
 			throw new Exception("Code invalide");
@@ -44,13 +44,8 @@ public class Rdv {
 		this.codeAnimal = codeAnimal;
 	}
 
-	public Rdv(long codeVeto, Date dateRdv, long codeAnimal) throws Exception {
+	public Rdv(int codeVeto, Date dateRdv, int codeAnimal) throws Exception {
 		setCodeVeto(codeVeto);
-		setDateRdv(dateRdv);
-		setCodeAnimal(codeAnimal);
-	}
-
-	public Rdv(Date dateRdv, long codeAnimal) throws Exception {
 		setDateRdv(dateRdv);
 		setCodeAnimal(codeAnimal);
 	}

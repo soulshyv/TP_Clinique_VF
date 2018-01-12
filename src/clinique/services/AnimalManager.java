@@ -19,9 +19,9 @@ public class AnimalManager extends Observable {
 	
 	private AnimalManager() throws BLLException 
 	{
-		daoAnimal = DAOFactory.getAnimalDAO();
-		
 		try {
+			daoAnimal = DAOFactory.getAnimalDAO();
+			
 			animalListe = daoAnimal.selectAll();
 		} catch (DALException e) {
 			throw new BLLException("[Animal manager] instanciating failed - " + e.getMessage());
@@ -91,7 +91,7 @@ public class AnimalManager extends Observable {
 		this.notifyObservers();
 	}
 	
-	public List<Animal> rechercherAnimalParCode(int code) throws BLLException
+	public Animal rechercherAnimalParCode(int code) throws BLLException
 	{
 		try {
 //			this.setChanged();

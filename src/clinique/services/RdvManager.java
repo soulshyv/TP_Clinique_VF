@@ -18,15 +18,27 @@ public class RdvManager {
 	
 	private RdvDAO daoRdv;
 	
+	public List<Rdv> getRdvListe() {
+		return rdvListe;
+	}
+
 	private RdvManager() throws BLLException
 	{
-		daoRdv = DAOFactory.getRdvDAO();
-		
 		try {
+			daoRdv = DAOFactory.getRdvDAO();
+			
 			rdvListe = daoRdv.selectAll();
 		} catch (DALException e) {
 			throw new BLLException("[Rdv manager] instanciating failed - " + e.getMessage());
 		}
+	}
+	
+	public static RdvManager getInstance() throws BLLException
+	{
+		if(instance == null)
+			instance = new RdvManager();
+		
+		return instance;
 	}
 	
 	public void ajouterRdv(Client client, Animal animal, Personnel veto, Date date) throws BLLException

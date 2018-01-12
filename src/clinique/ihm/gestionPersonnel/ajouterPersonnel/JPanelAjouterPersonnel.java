@@ -36,7 +36,7 @@ public class JPanelAjouterPersonnel extends JPanel {
 
 		initializeComponents();
 		
-		initializeListener();
+		initializeListeners();
 	}
 
 	private void initializeComponents() throws BLLException {
@@ -87,7 +87,7 @@ public class JPanelAjouterPersonnel extends JPanel {
 
 	}
 
-	private void initializeListener() {
+	private void initializeListeners() {
 		btnValider.addActionListener(new ActionListener() {
 			
 			@Override

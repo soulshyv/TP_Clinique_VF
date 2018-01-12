@@ -22,6 +22,7 @@ import clinique.services.AnimalManager;
 import clinique.services.BLLException;
 import clinique.services.ClientManager;
 
+@SuppressWarnings("serial")
 public class JPanelButton extends JPanel {
 	
 	private int index;

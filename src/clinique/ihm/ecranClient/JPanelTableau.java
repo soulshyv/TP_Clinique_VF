@@ -23,6 +23,7 @@ import clinique.services.BLLException;
 import clinique.services.ClientManager;
 
 
+@SuppressWarnings("serial")
 public class JPanelTableau extends JPanel implements Observer{
 
 	public JPanelTabButton PanelParent;

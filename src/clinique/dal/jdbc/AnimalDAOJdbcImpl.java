@@ -142,7 +142,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				PreparedStatement rqt = cnx.prepareStatement(sqlSelectByRace);) {
 
 			rqt.setString(1, race);
-			ResultSet rs = rqt.executeQuery(sqlSelectByRace);
+			ResultSet rs = rqt.executeQuery();
 			Animal animal = null;
 
 			ClientManager clMngr = ClientManager.getInstance();
@@ -201,7 +201,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 						.prepareStatement(sqlSelectByEspece);) {
 
 			rqt.setString(1, espece);
-			ResultSet rs = rqt.executeQuery(sqlSelectByEspece);
+			ResultSet rs = rqt.executeQuery();
 			Animal animal = null;
 			
 			ClientManager clMngr = ClientManager.getInstance();
@@ -225,19 +225,17 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 	}
 
 	@Override
-	public List<Animal> selectByCode(int codeAnimal) throws DALException {
-		List<Animal> liste = new ArrayList<Animal>();
+	public Animal selectByCode(int codeAnimal) throws DALException {
 		try (Connection cnx = JdbcTools.getConnection();
 				PreparedStatement rqt = cnx
 						.prepareStatement(sqlSelectByCodeAnimal);) {
 
 			rqt.setInt(1, codeAnimal);
-			ResultSet rs = rqt.executeQuery(sqlSelectByCodeAnimal);
-			Animal animal = null;
-
+			ResultSet rs = rqt.executeQuery();
+			
 			ClientManager clMngr = ClientManager.getInstance();
 			while (rs.next()) {
-				animal = new Animal(rs.getInt("CodeAnimal"),
+				return new Animal(rs.getInt("CodeAnimal"),
 						rs.getString("NomAnimal"), rs.getString("Race"),
 						rs.getString("Sexe"), rs.getString("Couleur"),
 						rs.getString("Espece"), rs.getString("Tatouage"),
@@ -245,14 +243,12 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 						rs.getBoolean("archive"),
 						clMngr.rechercherClientParCode(rs
 								.getInt("CodeClient")));
-
-				liste.add(animal);
 			}
 		} catch (Exception e) {
 			throw new DALException("[Animal] select by code failed - " + e.getMessage());
 		}
 		
-		return liste;
+		return null;
 	}
 
 }

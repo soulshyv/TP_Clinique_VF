@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import clinique.ihm.connexion.EcranConnexion;
 import clinique.services.BLLException;
 
+@SuppressWarnings("serial")
 public class FenetreClient extends JFrame {
 	private EcranConnexion FrameParent;
 	
