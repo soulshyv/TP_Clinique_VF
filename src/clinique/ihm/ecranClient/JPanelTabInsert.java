@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import clinique.services.AnimalManager;
 import clinique.services.BLLException;
+import clinique.services.ClientManager;
 
 @SuppressWarnings("serial")
 public class JPanelTabInsert extends JPanel {
@@ -29,13 +30,14 @@ public class JPanelTabInsert extends JPanel {
 		panelParentMenu = parent;
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		GridBagConstraints gbc = new GridBagConstraints();
+		ClientManager clientManager = ClientManager.getInstance();
 		
     	gbc.insets = new Insets(5, 5, 5, 5);
     	
     	panelInsert = new JPanelInsert(this);
     	panelTab = new JPanelTableau(this);
 		AnimalManager animalManager = AnimalManager.getInstance();
-		//animalManager.addObserver(monPanel2);
+		clientManager.addObserver(panelTab);
 		
 		gbc.gridx = 0;
     	gbc.gridy = 0;

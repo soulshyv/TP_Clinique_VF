@@ -18,10 +18,10 @@
 //		Connection cnx = JdbcTools.getConnection();
 //	}
 //	
-//	@Test
-//	public void addAnimalTest() throws DALException {
-//		AnimalDAO daoAnimal = DAOFactory.getAnimalDAO();
-//		daoAnimal.insert(new Animal("Porggy", "Porg", ));
-//	}
+////	@Test
+////	public void addAnimalTest() throws DALException {
+////		AnimalDAO daoAnimal = DAOFactory.getAnimalDAO();
+////		daoAnimal.insert(new Animal("Porggy", "Porg", ));
+////	}
 //
 //}

@@ -17,7 +17,8 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 	private final String sqlDelete = "DELETE FROM clients WHERE CodeClient=?";
 	private final String sqlSelectByCode = "SELECT * FROM clients WHERE CodeClient=?";
 	private final String sqlSelectByNom = "SELECT * FROM clients WHERE NomClient=?";
-	private final String sqlSelectAll = "SELECT * FROM clients";
+	private final String sqlSelectAll = "SELECT * FROM clients WHERE Archive = 0";
+	private final String sqlArchive = "{CALL archive_client_animaux (?)}";
 
 	@Override
 	public void insert(Client client) throws DALException {
@@ -155,6 +156,26 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 			return clients;
 		} catch (Exception e) {
 			throw new DALException("[Client] select all failed - " + e.getMessage());
+		}
+	}
+	@Override
+	public void ArchiveByCode(int code) throws DALException {
+		try (Connection conn = JdbcTools.getConnection()) {
+			conn.setAutoCommit(false);
+
+			CallableStatement rqt = conn.prepareCall(sqlArchive);
+			rqt.setInt(1, code);
+			System.out.println(code);
+
+			int nbRows = rqt.executeUpdate();
+			if (nbRows < 0) {
+				conn.rollback();
+				throw new DALException("[Client] Archive by code failed");
+			} else {
+				conn.commit();
+			}
+		} catch (Exception e) {
+			throw new DALException("[Client Archive] Archive by code failed - " + e.getMessage());
 		}
 	}
 

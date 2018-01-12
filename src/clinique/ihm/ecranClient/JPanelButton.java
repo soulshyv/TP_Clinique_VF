@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -22,6 +23,8 @@ import clinique.services.ClientManager;
 
 @SuppressWarnings("serial")
 public class JPanelButton extends JPanel {
+	
+	private int index;
 
 	public JPanelMenu PanelButton;
 
@@ -54,10 +57,10 @@ public class JPanelButton extends JPanel {
 		this.JButtonPremier = new JButton("|<<");
 
 		JLabelSuivant = new JLabel("Suivant");
-		this.JButtonSuivant = new JButton("<");
+		this.JButtonSuivant = new JButton(">");
 
 		JLabelPrecedent = new JLabel("Precedent");
-		this.JButtonPrecedent = new JButton(">");
+		this.JButtonPrecedent = new JButton("<");
 
 		JLabelDernier = new JLabel("Dernier");
 		this.JButtonDernier = new JButton(">>|");
@@ -78,19 +81,19 @@ public class JPanelButton extends JPanel {
 
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		this.add(JLabelSuivant, gbc);
+		this.add(JLabelPrecedent, gbc);
 
 		gbc.gridx = 1;
 		gbc.gridy = 1;
-		this.add(JButtonSuivant, gbc);
+		this.add(JButtonPrecedent, gbc);
 
 		gbc.gridx = 2;
 		gbc.gridy = 0;
-		this.add(JLabelPrecedent, gbc);
+		this.add(JLabelSuivant, gbc);
 
 		gbc.gridx = 2;
 		gbc.gridy = 1;
-		this.add(JButtonPrecedent, gbc);
+		this.add(JButtonSuivant, gbc);
 
 		gbc.gridx = 3;
 		gbc.gridy = 0;
@@ -131,6 +134,147 @@ public class JPanelButton extends JPanel {
 		gbc.gridx = 9;
 		gbc.gridy = 1;
 		this.add(JRecherche, gbc);
+		
+		JButtonPremier.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					ClientManager clientManager = ClientManager.getInstance();
+					List<Client> listeClient = clientManager.getClient();
+					Client c = listeClient.get(0);
+					PanelButton.monPanelTabInsert.panelInsert.TextInputNom.setText(c.getNom());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputPrenom.setText(c.getPrenom());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAdresse1.setText(c.getAdresse1());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAdresse2.setText(c.getAdresse2());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputCodePostal.setText(c.getCp());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputVille.setText(c.getVille());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputTelNum.setText(c.getNumTel());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAssurance.setText(c.getAssurance());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputRemarque.setText(c.getRemarque());
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		});
+		
+		JButtonDernier.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					ClientManager clientManager = ClientManager.getInstance();
+					List<Client> listeClient = clientManager.getClient();
+					index = listeClient.size() - 1;
+					Client c = listeClient.get(index);
+					PanelButton.monPanelTabInsert.panelInsert.TextInputNom.setText(c.getNom());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputPrenom.setText(c.getPrenom());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAdresse1.setText(c.getAdresse1());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAdresse2.setText(c.getAdresse2());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputCodePostal.setText(c.getCp());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputVille.setText(c.getVille());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputTelNum.setText(c.getNumTel());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAssurance.setText(c.getAssurance());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputRemarque.setText(c.getRemarque());
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		});
+		
+		JButtonSuivant.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					ClientManager clientManager = ClientManager.getInstance();
+					List<Client> listeClient = clientManager.getClient();
+					if (index >= listeClient.size() - 1)
+					{
+						index = listeClient.size() - 1;
+					} else {
+						index++;
+					}
+					Client c = listeClient.get(index);
+					PanelButton.monPanelTabInsert.panelInsert.TextInputNom.setText(c.getNom());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputPrenom.setText(c.getPrenom());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAdresse1.setText(c.getAdresse1());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAdresse2.setText(c.getAdresse2());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputCodePostal.setText(c.getCp());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputVille.setText(c.getVille());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputTelNum.setText(c.getNumTel());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAssurance.setText(c.getAssurance());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputRemarque.setText(c.getRemarque());
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		});
+		
+		JButtonPrecedent.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					ClientManager clientManager = ClientManager.getInstance();
+					List<Client> listeClient = clientManager.getClient();
+					if (index == 0)
+					{
+						index = 0;
+					} else {
+						index--;
+					}
+					Client c = listeClient.get(index);
+					PanelButton.monPanelTabInsert.panelInsert.TextInputNom.setText(c.getNom());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputPrenom.setText(c.getPrenom());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAdresse1.setText(c.getAdresse1());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAdresse2.setText(c.getAdresse2());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputCodePostal.setText(c.getCp());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputVille.setText(c.getVille());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputTelNum.setText(c.getNumTel());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputAssurance.setText(c.getAssurance());
+					PanelButton.monPanelTabInsert.panelInsert.TextInputRemarque.setText(c.getRemarque());
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		});
 
 		JButtonAjouter.addActionListener(new ActionListener() {
 
@@ -167,5 +311,33 @@ public class JPanelButton extends JPanel {
 			}
 
 		});
+		
+		JButtonSupprimer.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					ClientManager clientManager = ClientManager.getInstance();
+					JPanelTabInsert parent1 = PanelButton.monPanelTabInsert;
+					JPanelInsert parent2 = parent1.panelInsert;
+					JTextField text = parent2.TextInputNom;
+					System.out.println(text.getText());
+					clientManager.ArchiverClient(PanelButton.monPanelTabInsert.panelInsert.TextInputNom.getText());
+					System.out.println(text.getText());
+				} catch (BLLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+		});
+		
 	}
 }
