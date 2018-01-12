@@ -171,7 +171,7 @@ public class AnimalDAOJdbcImpl implements AnimalDAO {
 				PreparedStatement rqt = cnx.prepareStatement(sqlSelectByCode);) {
 
 			rqt.setInt(1, codeClient);
-			ResultSet rs = rqt.executeQuery(sqlSelectByCode);
+			ResultSet rs = rqt.executeQuery();
 			Animal animal = null;
 
 			ClientManager clMngr = ClientManager.getInstance();

@@ -32,6 +32,7 @@ public class JPanelMenu extends JPanel {
     	gbc.insets = new Insets(5, 5, 5, 5);
     	panelButton = new JPanelButton(this);
 		monPanelTabInsert = new JPanelTabInsert(this);
+		
 		this.add(panelButton);
 		this.add(monPanelTabInsert);
 		

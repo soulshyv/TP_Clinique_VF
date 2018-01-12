@@ -1,6 +1,7 @@
 package clinique.ihm.ecranClient;
 
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.BoxLayout;
@@ -11,41 +12,41 @@ import clinique.services.AnimalManager;
 import clinique.services.BLLException;
 import clinique.services.ClientManager;
 
-public class JPanelTabInsert extends JPanel {
+public class JPanelTabButton extends JPanel {
 	
-	public JPanelMenu panelParentMenu;
+	public JPanelTabInsert panelParentMenu;
 	
-	public JPanelTabButton panelTab;
+	public JPanelTableau panelTab;
 	
-	public JPanelInsert panelInsert;
+	public JPanelButtonAjouter panelAjouter;
 	
-	public JPanelMenu getPanelParentMenu() {
+	public JPanelTabInsert getPanelParentMenu() {
 		return panelParentMenu;
 	}
 
 
 
-	public JPanelTabInsert(JPanelMenu parent) throws BLLException{
-		panelParentMenu = parent;
-		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+	public JPanelTabButton(JPanelTabInsert JPanelTabInsert) throws BLLException{
+		panelParentMenu = JPanelTabInsert;
+		this.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		ClientManager clientManager = ClientManager.getInstance();
 		
     	gbc.insets = new Insets(5, 5, 5, 5);
     	
-    	panelInsert = new JPanelInsert(this);
-    	panelTab = new JPanelTabButton(this);
+    	panelAjouter = new JPanelButtonAjouter(this);
+    	panelTab = new JPanelTableau(this);
 		AnimalManager animalManager = AnimalManager.getInstance();
 		//clientManager.addObserver(panelTab);
-		//animalManager.addObserver(panelTab);
+		animalManager.addObserver(panelTab);
 		
 		gbc.gridx = 0;
-    	gbc.gridy = 0;
-    	this.add(panelInsert);
+    	gbc.gridy = 1;
+    	this.add(panelAjouter, gbc);
     	
-    	gbc.gridx = 1;
+    	gbc.gridx = 0;
     	gbc.gridy = 0;
-    	this.add(panelTab);
+    	this.add(panelTab, gbc);
 		//this.add(monPanel1);
 		//this.add(monPanel2);
 	}

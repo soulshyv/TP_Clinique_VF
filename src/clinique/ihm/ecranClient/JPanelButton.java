@@ -18,6 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import clinique.models.Client;
+import clinique.services.AnimalManager;
 import clinique.services.BLLException;
 import clinique.services.ClientManager;
 
@@ -151,6 +152,8 @@ public class JPanelButton extends JPanel {
 					PanelButton.monPanelTabInsert.panelInsert.TextInputTelNum.setText(c.getNumTel());
 					PanelButton.monPanelTabInsert.panelInsert.TextInputAssurance.setText(c.getAssurance());
 					PanelButton.monPanelTabInsert.panelInsert.TextInputRemarque.setText(c.getRemarque());
+					AnimalManager animManager = AnimalManager.getInstance();
+					animManager.rechercherAnimalParClient(c.getCode());
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -184,6 +187,8 @@ public class JPanelButton extends JPanel {
 					PanelButton.monPanelTabInsert.panelInsert.TextInputTelNum.setText(c.getNumTel());
 					PanelButton.monPanelTabInsert.panelInsert.TextInputAssurance.setText(c.getAssurance());
 					PanelButton.monPanelTabInsert.panelInsert.TextInputRemarque.setText(c.getRemarque());
+					AnimalManager animManager = AnimalManager.getInstance();
+					animManager.rechercherAnimalParClient(c.getCode());
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -222,6 +227,8 @@ public class JPanelButton extends JPanel {
 					PanelButton.monPanelTabInsert.panelInsert.TextInputTelNum.setText(c.getNumTel());
 					PanelButton.monPanelTabInsert.panelInsert.TextInputAssurance.setText(c.getAssurance());
 					PanelButton.monPanelTabInsert.panelInsert.TextInputRemarque.setText(c.getRemarque());
+					AnimalManager animManager = AnimalManager.getInstance();
+					animManager.rechercherAnimalParClient(c.getCode());
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -260,6 +267,8 @@ public class JPanelButton extends JPanel {
 					PanelButton.monPanelTabInsert.panelInsert.TextInputTelNum.setText(c.getNumTel());
 					PanelButton.monPanelTabInsert.panelInsert.TextInputAssurance.setText(c.getAssurance());
 					PanelButton.monPanelTabInsert.panelInsert.TextInputRemarque.setText(c.getRemarque());
+					AnimalManager animManager = AnimalManager.getInstance();
+					animManager.rechercherAnimalParClient(c.getCode());
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -322,6 +331,7 @@ public class JPanelButton extends JPanel {
 					JTextField text = parent2.TextInputNom;
 					System.out.println(text.getText());
 					clientManager.ArchiverClient(PanelButton.monPanelTabInsert.panelInsert.TextInputNom.getText());
+					JButtonPrecedent.doClick();
 					System.out.println(text.getText());
 				} catch (BLLException e) {
 					// TODO Auto-generated catch block

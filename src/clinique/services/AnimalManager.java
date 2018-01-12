@@ -87,11 +87,15 @@ public class AnimalManager extends Observable {
 		} catch (DALException e) {
 			throw new BLLException("[Animal manager] changer infos animal failed - " + e.getMessage());
 		}
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
 	public List<Animal> rechercherAnimalParCode(int code) throws BLLException
 	{
 		try {
+//			this.setChanged();
+//			this.notifyObservers();
 			return daoAnimal.selectByCode(code);
 		} catch (DALException e) {
 			throw new BLLException("[Animal manager] rechercher animal par code failed - " + e.getMessage());
@@ -101,6 +105,8 @@ public class AnimalManager extends Observable {
 	public List<Animal> rechercherAnimalParRace(String race) throws BLLException
 	{
 		try {
+//			this.setChanged();
+//			this.notifyObservers();
 			return daoAnimal.selectByRace(race);
 		} catch (DALException e) {
 			throw new BLLException("[Animal manager] rechercher animal par race failed - " + e.getMessage());
@@ -110,6 +116,8 @@ public class AnimalManager extends Observable {
 	public List<Animal> rechercherAnimalParClient(int codeClient) throws BLLException
 	{
 		try {
+			this.setChanged();
+			this.notifyObservers(daoAnimal.selectByClient(codeClient));
 			return daoAnimal.selectByClient(codeClient);
 		} catch (DALException e) {
 			throw new BLLException("[Animal manager] rechercher animal par client failed - " + e.getMessage());

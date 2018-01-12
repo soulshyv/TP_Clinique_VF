@@ -170,12 +170,14 @@ public class ClientDAOJdbcImpl implements ClientDAO {
 
 			int nbRows = rqt.executeUpdate();
 			if (nbRows < 0) {
-				conn.rollback();
-				throw new DALException("[Client] Archive by code failed");
+			
+				//throw new DALException("[Client] Archive by code failed");
 			} else {
-				conn.commit();
+				
 			}
+			conn.commit();
 		} catch (Exception e) {
+			//conn.rollback();
 			throw new DALException("[Client Archive] Archive by code failed - " + e.getMessage());
 		}
 	}

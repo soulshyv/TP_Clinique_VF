@@ -113,10 +113,21 @@ public class ClientManager extends Observable {
 		
 		try {
 			List<Client> c = daoClient.selectByNom(nom);
+			int i = 0;
 			if (c.size() == 1)
 			{
 				int code = c.get(0).getCode();
 				daoClient.ArchiveByCode(code);
+				for(Client cli : clientListe)
+				{
+					if(cli.getNom().equals(nom)) 
+					{
+						clientListe.remove(i);
+						break;
+					}
+					i++;
+				}
+				
 			}
 		} catch (DALException e) {
 			throw new BLLException("[ClientManager] rechercher client par nom failed - " + e.getMessage());

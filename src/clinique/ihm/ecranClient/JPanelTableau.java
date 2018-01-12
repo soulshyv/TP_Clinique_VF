@@ -2,7 +2,9 @@ package clinique.ihm.ecranClient;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -23,20 +25,22 @@ import clinique.services.ClientManager;
 
 public class JPanelTableau extends JPanel implements Observer{
 
-	public JPanelTabInsert PanelParent;
+	public JPanelTabButton PanelParent;
 	
 	public JScrollPane ScrollPane;
 	
 	public JTable listScroller;
 	
 	
-	public JPanelTabInsert getPanelParent() {
+	public JPanelTabButton getPanelParent() {
 		return PanelParent;
 	}
 
-	public JPanelTableau(JPanelTabInsert parent){
-		PanelParent = parent;
+	public JPanelTableau(JPanelTabButton JPanelTabButton){
+		PanelParent = JPanelTabButton;
 		this.setLayout(new BorderLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+    	gbc.insets = new Insets(5, 5, 5, 5);
 		ClientManager clientManager;
 		AnimalManager animalManager;
 		try {
@@ -53,7 +57,7 @@ public class JPanelTableau extends JPanel implements Observer{
 			updateTable(animal);
 			
 		} catch (BLLException e) {
-			JOptionPane.showMessageDialog(parent, e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(JPanelTabButton, e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -86,13 +90,17 @@ public class JPanelTableau extends JPanel implements Observer{
 	public void update(Observable arg0, Object arg1) {
 		this.setLayout(new GridBagLayout());
 		AnimalManager animalManager;
+		ClientManager cliManager;
 		try {
 			animalManager = AnimalManager.getInstance(); 
-			List<Animal> animal = animalManager.getAnimaux();
+			cliManager = ClientManager.getInstance();
+			List<Client> c = cliManager.rechercherClientParNom(PanelParent.panelParentMenu.panelInsert.TextInputNom.getText());
+			int nbClient = c.get(0).getCode();
+			List<Animal> animal = (List<Animal>) arg1;
 
 			updateTable(animal);
 		} catch (BLLException e) {
-			JOptionPane.showMessageDialog(PanelParent.getPanelParentMenu().getFrameParent(), e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(PanelParent.getPanelParentMenu().getPanelParentMenu().getFrameParent(), e.getMessage(), "Une erreur est survenue", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}
