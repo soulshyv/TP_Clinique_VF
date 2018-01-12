@@ -2,6 +2,7 @@ package clinique.dal;
 
 public class DAOFactory {
 	
+	//Retourne une instance de ClientDAO
 	public static ClientDAO getClientDAO() throws DALException
 	{
 		ClientDAO clientDAO=null;
@@ -12,7 +13,8 @@ public class DAOFactory {
 		}
 		return clientDAO; 
 	}
-	
+
+	//Retourne une instance de RdvDAO
 	public static RdvDAO getRdvDAO() throws DALException
 	{
 		RdvDAO rdvDAO=null;
@@ -23,7 +25,8 @@ public class DAOFactory {
 		}
 		return rdvDAO; 
 	}
-	
+
+	//Retourne une instance de AnimalDAO
 	public static AnimalDAO getAnimalDAO() throws DALException
 	{
 		AnimalDAO animalDAO=null;
@@ -34,7 +37,8 @@ public class DAOFactory {
 		}
 		return animalDAO;
 	}
-	
+
+	//Retourne une instance de PersonnelDAO
 	public static PersonnelDAO getPersonnelDAO() throws DALException
 	{
 		PersonnelDAO persoDAO  = null;

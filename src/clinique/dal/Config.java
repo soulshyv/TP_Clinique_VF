@@ -15,6 +15,7 @@ public class Config {
 		}
 	}
 	
+	//Retourne une connexion à la base de données
 	public static String getProperty(String key){
 		String parametre = properties.getProperty(key,null);
 		return parametre;
