@@ -47,12 +47,15 @@ public class JPanelConnexion extends JPanel {
     	
     	this.setLayout(new GridBagLayout());
     	
+    	//Champ nom
     	JLabel textLabelConnexion = new JLabel("Nom");
     	this.TextInputConnexion = new JTextField(15);
     	
+    	//Champ mot de passe
     	JLabel textLabelMotDePasse = new JLabel("Mot de passe");
     	this.TextInputMotDePasse = new JPasswordField(15);
     	
+    	//Bouton de validation
     	this.JButtonValider = new JButton("Valider");
     	
     	gbc.gridx = 0;
@@ -77,19 +80,23 @@ public class JPanelConnexion extends JPanel {
 	}
 
 	private void initializeListener() {
+		//Click bouton valider
 		JButtonValider.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//On vérifie que les champs sont remplis
 					if(TextInputConnexion.getText().trim() == "" || String.valueOf(TextInputMotDePasse.getPassword()).trim() == "")
 						throw new Exception("Veuillez renseigner tous les champs");
 						
+					//On vérifie les logs donnés
 					PersonnelManager PersMng = PersonnelManager.getInstance();
 					String role = PersMng.ConnexionEmploye(TextInputConnexion.getText(), String.valueOf(TextInputMotDePasse.getPassword()));
 					if(role == null || role.trim() == "")
 						throw new Exception("Identifiants de connexion erronés");
 					
+					//On lance la fenêtre correspondant au rôle
 					JFrame ecr = null;
 					switch(role)
 					{
@@ -111,6 +118,7 @@ public class JPanelConnexion extends JPanel {
 							throw new BLLException("Vous n'avez pas les permissions requises");
 					}
 					
+					//On rend invisible la fenêtre de connexion et on vide les champs
 					FrameParent.setVisible(false);
 					TextInputConnexion.setText("");
 					TextInputMotDePasse.setText("");

@@ -16,9 +16,9 @@ public class ClientManager {
 	
 	private ClientManager() throws BLLException
 	{
-		daoClient = DAOFactory.getClientDAO();
-		
 		try {
+			daoClient = DAOFactory.getClientDAO();
+			
 			clientListe = daoClient.selectAll();
 		} catch (Exception e) {
 			throw new BLLException("[Client manager] instanciating failed - " + e.getMessage());

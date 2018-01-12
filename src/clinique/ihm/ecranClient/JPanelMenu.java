@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import clinique.services.BLLException;
 
+@SuppressWarnings("serial")
 public class JPanelMenu extends JPanel {
 	
 	public JFrame FrameParent;

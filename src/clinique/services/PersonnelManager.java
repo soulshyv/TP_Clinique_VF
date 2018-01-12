@@ -21,9 +21,9 @@ public class PersonnelManager extends Observable{
 	
 	private PersonnelManager() throws BLLException
 	{
-		daoPerso = DAOFactory.getPersonnelDAO();
-		
 		try {
+			daoPerso = DAOFactory.getPersonnelDAO();
+			
 			persoListe = daoPerso.selectAll();
 		} catch (Exception e) {
 			throw new BLLException("[Personnel manager] instanciating failed - " + e.getMessage());
@@ -79,6 +79,9 @@ public class PersonnelManager extends Observable{
 		}
 	}
 	
+	/*
+	 * Ajouter un employé
+	 */
 	public void ajouterEmploye(Personnel perso) throws BLLException {
 		try {
 			daoPerso.insert(perso);
@@ -110,6 +113,9 @@ public class PersonnelManager extends Observable{
 		}
 	}
 	
+	/*
+	 * Méthode de connexion pour les employés
+	 */
 	public String ConnexionEmploye(String nom, String mdp) throws BLLException {
 		List<Personnel> pers = rechercherParNom(nom);
 		if(pers.size() < 1)
@@ -117,7 +123,7 @@ public class PersonnelManager extends Observable{
 		
 		for(Personnel p : pers)
 		{
-			if(p.getMdp().trim().equals(mdp.trim()))
+			if(p.getMdp().trim().equals(mdp.trim()) && p.getNom().equals(nom))
 			{
 				return p.getRole();
 			}

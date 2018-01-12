@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import clinique.services.AnimalManager;
 import clinique.services.BLLException;
 
+@SuppressWarnings("serial")
 public class JPanelTabInsert extends JPanel {
 	
 	public JPanelMenu panelParentMenu;

@@ -20,5 +20,5 @@ public interface AnimalDAO {
 	
 	public List<Animal> selectByEspece(String espece) throws DALException;
 	
-	public List<Animal> selectByCode(int codeAnimal) throws DALException;
+	public Animal selectByCode(int codeAnimal) throws DALException;
 }

@@ -20,6 +20,7 @@ import clinique.models.Client;
 import clinique.services.BLLException;
 import clinique.services.ClientManager;
 
+@SuppressWarnings("serial")
 public class JPanelButton extends JPanel {
 
 	public JPanelMenu PanelButton;

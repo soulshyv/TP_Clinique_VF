@@ -16,6 +16,7 @@ public class EcranConnexion  extends JFrame {
 	private void initializeComponents() {
 		JPanelConnexion connexionPanel = new JPanelConnexion(this);
 		
+		//On vérifie la connexion à la base de données
 		try {
 			JdbcTools.getConnection();
 		} catch (SQLException e) {
